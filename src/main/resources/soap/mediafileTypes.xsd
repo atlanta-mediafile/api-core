@@ -12,252 +12,336 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     elementFormDefault="qualified"
 >
     <!-- Login endpoint -->
-    <xs:complexType name="Login">
-        <xs:sequence>
-            <xs:element name="username" type="xs:string"/>
-            <xs:element name="password" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="Login">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <!-- Register endpoint -->
-    <xs:complexType name="Register">
-        <xs:sequence>
-            <xs:element name="username" type="xs:string"/>
-            <xs:element name="email"    type="xs:string"/>
-            <xs:element name="password" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="Register">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="email"    type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- Get user endpoint -->
+    <xs:element name="GetUser">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target" type="tns:Identifiers"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!--  Get files and folder metada from folder  endpoint-->
-    <xs:complexType name="GetFiles">
-        <xs:sequence>
-            <xs:element name="target" type="tns:Identifiers"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="GetFiles">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target" type="tns:Identifiers"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Share file endpoint -->
-    <xs:complexType name="ShareFile">
-        <xs:sequence>
-            <xs:element name="target" type="tns:Identifiers"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="ShareFile">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target" type="tns:Identifiers"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Upload file endpoint -->
-    <xs:complexType name="UploadFile">
-        <xs:sequence>
-            <xs:element name="target"       type="tns:Identifiers"/>
-            <xs:element name="folderId"     type="xs:string"/>
-            <xs:element name="name"         type="xs:string"/>
-            <xs:element name="extension"    type="xs:string"/>
-            <xs:element name="content"      type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="UploadFile">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target"       type="tns:Identifiers"/>
+                <xs:element name="folderId"     type="xs:string"/>
+                <xs:element name="name"         type="xs:string"/>
+                <xs:element name="extension"    type="xs:string"/>
+                <xs:element name="content"      type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Delete file endpoint -->
-    <xs:complexType name="DeleteFile">
-        <xs:sequence>
-            <xs:element name="target" type="tns:Identifiers"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="DeleteFile">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target" type="tns:Identifiers"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Move file endpoint -->
-    <xs:complexType name="MoveFile">
-        <xs:sequence>
-            <xs:element name="target"   type="tns:Identifiers"/>
-            <xs:element name="folderId" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="MoveFile">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target"   type="tns:Identifiers"/>
+                <xs:element name="folderId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Edit file endpoint -->
-    <xs:complexType name="EditFile">
-        <xs:sequence>
-            <xs:element name="target"       type="tns:Identifiers"/>
-            <xs:element name="name"         type="xs:string"/>
-            <xs:element name="extension"    type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="EditFile">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target"       type="tns:Identifiers"/>
+                <xs:element name="name"         type="xs:string"/>
+                <xs:element name="extension"    type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Download files endpoint -->
-    <xs:complexType name="DownloadFiles">
-        <xs:sequence>
-            <xs:element name="target" type="tns:Identifiers"/>
-            <xs:element name="folderId" maxOccurs="unbounded">
-                <xs:complexType>
-                  <xs:simpleContent>
-                    <xs:extension base="xs:string">
-                      <xs:attribute name="type" type="tns:FileType"/>
-                    </xs:extension>
-                  </xs:simpleContent>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="DownloadFiles">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target" type="tns:Identifiers"/>
+                <xs:element name="folderId" maxOccurs="unbounded">
+                    <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                        <xs:attribute name="type" type="tns:FileType"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Share folder endpoint -->
-    <xs:complexType name="ShareFolder">
-        <xs:sequence>
-            <xs:element name="target" type="tns:Identifiers"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="ShareFolder">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target" type="tns:Identifiers"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Delete folder endpoint -->
-    <xs:complexType name="DeleteFolder">
-        <xs:sequence>
-            <xs:element name="target" type="tns:Identifiers"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="DeleteFolder">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target" type="tns:Identifiers"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Move folder endpoint -->
-    <xs:complexType name="MoveFolder">
-        <xs:sequence>
-            <xs:element name="target"   type="tns:Identifiers"/>
-            <xs:element name="folderId" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="MoveFolder">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target"   type="tns:Identifiers"/>
+                <xs:element name="folderId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Create folder endpoint -->
-    <xs:complexType name="CreateFolder">
-        <xs:sequence>
-            <xs:element name="target"   type="tns:Identifiers"/>
-            <xs:element name="folderId" type="xs:string"/>
-            <xs:element name="name"     type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="CreateFolder">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target"   type="tns:Identifiers"/>
+                <xs:element name="folderId" type="xs:string"/>
+                <xs:element name="name"     type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <!-- Create folder endpoint -->
-    <xs:complexType name="RenameFolder">
-        <xs:sequence>
-            <xs:element name="target"   type="tns:Identifiers"/>
-            <xs:element name="name"     type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="RenameFolder">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target"   type="tns:Identifiers"/>
+                <xs:element name="name"     type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Login endpoint response -->
-    <xs:complexType name="LoginResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-            <xs:element name="data"     type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="LoginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+                <xs:element name="data"     type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <!-- Register endpoint response -->
-    <xs:complexType name="RegisterResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-            <xs:element name="data"     type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="RegisterResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+                <xs:element name="data"     type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- Register endpoint -->
+    <xs:element name="GetUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+                <xs:element name="data">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="username" type="xs:string"/>
+                            <xs:element name="email"    type="xs:string"/>
+                            <xs:element name="password" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Get files endpoint response -->
-    <xs:complexType name="GetFilesResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-            <xs:element name="data">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="folder"   type="tns:FolderInfo"/>
-                        <xs:element name="files"    type="tns:FilesInfo"/>
-                        <xs:element name="folders"  type="tns:Folders"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="GetFilesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+                <xs:element name="data">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="folder"   type="tns:FolderInfo"/>
+                            <xs:element name="files"    type="tns:FilesInfo"/>
+                            <xs:element name="folders"  type="tns:Folders"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Share file endpoint response -->
-    <xs:complexType name="ShareFileResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-            <xs:element name="data"     type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="ShareFileResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+                <xs:element name="data"     type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Upload file endpoint response -->
-    <xs:complexType name="UploadFileResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-            <xs:element name="data"     type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="UploadFileResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+                <xs:element name="data"     type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Delete file endpoint response -->
-    <xs:complexType name="DeleteFileResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="DeleteFileResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Move file endpoint response -->
-    <xs:complexType name="MoveFileResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="MoveFileResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Edit file endpoint response -->
-    <xs:complexType name="EditFileResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="EditFileResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Download file endpoint response -->
-    <xs:complexType name="DownloadFilesResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-            <xs:element name="data"     type="tns:Files"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="DownloadFilesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+                <xs:element name="data"     type="tns:Files"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Share folder endpoint response -->
-    <xs:complexType name="ShareFolderResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="ShareFolderResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Delete folder endpoint response -->
-    <xs:complexType name="DeleteFolderResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="DeleteFolderResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Move folder endpoint response -->
-    <xs:complexType name="MoveFolderResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="MoveFolderResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Create folder endpoint response -->
-    <xs:complexType name="CreateFolderResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-            <xs:element name="data"     type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="CreateFolderResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+                <xs:element name="data"     type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <!-- Create folder endpoint -->
-    <xs:complexType name="RenameFolderResponse">
-        <xs:sequence>
-            <xs:element name="errors"   type="tns:Errors"/>
-            <xs:element name="success"  type="xs:boolean"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="RenameFolderResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errors"   type="tns:Errors"/>
+                <xs:element name="success"  type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     
     <!-- Folder metadata type -->
     <xs:complexType name="FolderInfo">
@@ -305,7 +389,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:complexType>
     
     <!-- Is file or folder enum -->
-    <xs:simpleType name="FileType" final="restriction" >
+    <xs:simpleType name="FileType" final="restriction">
         <xs:restriction base="xs:string">
             <xs:enumeration value="FOLDER" />
             <xs:enumeration value="FILE" />
