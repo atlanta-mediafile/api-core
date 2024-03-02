@@ -32,9 +32,9 @@ import jakarta.xml.bind.annotation.XmlType;
  *             &lt;complexContent&gt;
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *                 &lt;sequence&gt;
- *                   &lt;element name="folder" type="{http://www.generated.classes.mediafile.com/soap}FolderInfo"/&gt;
- *                   &lt;element name="files" type="{http://www.generated.classes.mediafile.com/soap}FilesInfo"/&gt;
- *                   &lt;element name="folders" type="{http://www.generated.classes.mediafile.com/soap}Folders"/&gt;
+ *                   &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *                   &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *                   &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *                 &lt;/sequence&gt;
  *               &lt;/restriction&gt;
  *             &lt;/complexContent&gt;
@@ -54,14 +54,14 @@ import jakarta.xml.bind.annotation.XmlType;
     "success",
     "data"
 })
-@XmlRootElement(name = "GetFilesResponse")
-public class GetFilesResponse {
+@XmlRootElement(name = "GetUserResponse")
+public class GetUserResponse {
 
     @XmlElement(required = true)
     protected Errors errors;
     protected boolean success;
     @XmlElement(required = true)
-    protected GetFilesResponse.Data data;
+    protected GetUserResponse.Data data;
 
     /**
      * Obtiene el valor de la propiedad errors.
@@ -108,10 +108,10 @@ public class GetFilesResponse {
      * 
      * @return
      *     possible object is
-     *     {@link GetFilesResponse.Data }
+     *     {@link GetUserResponse.Data }
      *     
      */
-    public GetFilesResponse.Data getData() {
+    public GetUserResponse.Data getData() {
         return data;
     }
 
@@ -120,10 +120,10 @@ public class GetFilesResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link GetFilesResponse.Data }
+     *     {@link GetUserResponse.Data }
      *     
      */
-    public void setData(GetFilesResponse.Data value) {
+    public void setData(GetUserResponse.Data value) {
         this.data = value;
     }
 
@@ -138,9 +138,9 @@ public class GetFilesResponse {
      *   &lt;complexContent&gt;
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
      *       &lt;sequence&gt;
-     *         &lt;element name="folder" type="{http://www.generated.classes.mediafile.com/soap}FolderInfo"/&gt;
-     *         &lt;element name="files" type="{http://www.generated.classes.mediafile.com/soap}FilesInfo"/&gt;
-     *         &lt;element name="folders" type="{http://www.generated.classes.mediafile.com/soap}Folders"/&gt;
+     *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+     *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+     *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
      *       &lt;/sequence&gt;
      *     &lt;/restriction&gt;
      *   &lt;/complexContent&gt;
@@ -151,89 +151,89 @@ public class GetFilesResponse {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "folder",
-        "files",
-        "folders"
+        "username",
+        "email",
+        "password"
     })
     public static class Data {
 
         @XmlElement(required = true)
-        protected FolderInfo folder;
+        protected String username;
         @XmlElement(required = true)
-        protected FilesInfo files;
+        protected String email;
         @XmlElement(required = true)
-        protected Folders folders;
+        protected String password;
 
         /**
-         * Obtiene el valor de la propiedad folder.
+         * Obtiene el valor de la propiedad username.
          * 
          * @return
          *     possible object is
-         *     {@link FolderInfo }
+         *     {@link String }
          *     
          */
-        public FolderInfo getFolder() {
-            return folder;
+        public String getUsername() {
+            return username;
         }
 
         /**
-         * Define el valor de la propiedad folder.
+         * Define el valor de la propiedad username.
          * 
          * @param value
          *     allowed object is
-         *     {@link FolderInfo }
+         *     {@link String }
          *     
          */
-        public void setFolder(FolderInfo value) {
-            this.folder = value;
+        public void setUsername(String value) {
+            this.username = value;
         }
 
         /**
-         * Obtiene el valor de la propiedad files.
+         * Obtiene el valor de la propiedad email.
          * 
          * @return
          *     possible object is
-         *     {@link FilesInfo }
+         *     {@link String }
          *     
          */
-        public FilesInfo getFiles() {
-            return files;
+        public String getEmail() {
+            return email;
         }
 
         /**
-         * Define el valor de la propiedad files.
+         * Define el valor de la propiedad email.
          * 
          * @param value
          *     allowed object is
-         *     {@link FilesInfo }
+         *     {@link String }
          *     
          */
-        public void setFiles(FilesInfo value) {
-            this.files = value;
+        public void setEmail(String value) {
+            this.email = value;
         }
 
         /**
-         * Obtiene el valor de la propiedad folders.
+         * Obtiene el valor de la propiedad password.
          * 
          * @return
          *     possible object is
-         *     {@link Folders }
+         *     {@link String }
          *     
          */
-        public Folders getFolders() {
-            return folders;
+        public String getPassword() {
+            return password;
         }
 
         /**
-         * Define el valor de la propiedad folders.
+         * Define el valor de la propiedad password.
          * 
          * @param value
          *     allowed object is
-         *     {@link Folders }
+         *     {@link String }
          *     
          */
-        public void setFolders(Folders value) {
-            this.folders = value;
+        public void setPassword(String value) {
+            this.password = value;
         }
 
     }

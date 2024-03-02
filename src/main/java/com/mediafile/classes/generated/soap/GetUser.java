@@ -38,8 +38,8 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "target"
 })
-@XmlRootElement(name = "DeleteFolder")
-public class DeleteFolder {
+@XmlRootElement(name = "GetUser")
+public class GetUser {
 
     @XmlElement(required = true)
     protected Identifiers target;
