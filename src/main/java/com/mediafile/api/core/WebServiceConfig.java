@@ -8,22 +8,25 @@ import com.mediafile.api.core.services.grpc.FileService;
 import com.mediafile.api.core.services.grpc.IFileService;
 import com.mediafile.api.core.services.rest.IMetadataService;
 import com.mediafile.api.core.services.rest.MetadataService;
-import com.mediafile.api.core.services.rmi.AuthService;
-import com.mediafile.api.core.services.rmi.IAuthService;
-import java.util.Properties;
+import com.mediafile.api.core.services.rmi.UserService;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
+import com.mediafile.api.core.services.rmi.IUserService;
 
 /**
  *
  * @author 000430063
  */
+@EnableWs
+@Configuration
 public class WebServiceConfig {
     
     @Bean
@@ -34,7 +37,7 @@ public class WebServiceConfig {
         return new ServletRegistrationBean<>(servlet, "/ws/*");
     }
     
-    @Bean(name = "files")
+    @Bean(name = "mediafileTypes")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema songsSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("FilesPort");
@@ -45,18 +48,13 @@ public class WebServiceConfig {
     }
     
     @Bean
-    public Properties getProperties(){
-        return new Properties();
+    public IUserService getAuthService(){
+        return new UserService();
     }
     
     @Bean
-    public IAuthService getAuthService(){
-        return new AuthService();
-    }
-    
-    @Bean
-    public IFileService getFileService(Properties properties){
-        return new FileService("", 0);
+    public IFileService getFileService(){
+        return new FileService("localhost", 3000);
     }
     
     @Bean
@@ -66,7 +64,7 @@ public class WebServiceConfig {
     
     @Bean
     public XsdSchema songsSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("songs.xsd"));
+        return new SimpleXsdSchema(new ClassPathResource("soap/mediafileTypes.xsd"));
     }
     
 }
