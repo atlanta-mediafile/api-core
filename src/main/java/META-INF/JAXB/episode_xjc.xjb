@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="3.0" xmlns="https://jakarta.ee/xml/ns/jaxb">
+  <!--
+
+Este archivo ha sido generado por Eclipse Implementation of JAXB v3.0.0 
+Visite https://eclipse-ee4j.github.io/jaxb-ri 
+Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
+Generado el: 2024.03.01 a las 10:52:27 PM CST 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.generated.classes.mediafile.com/soap">
+    <schemaBindings map="false">
+      <package name="com.mediafile.classes.generated.soap"/>
+    </schemaBindings>
+    <bindings scd="~tns:GetFilesResponse">
+      <class ref="com.mediafile.classes.generated.soap.GetFilesResponse"/>
+    </bindings>
+    <bindings scd="~tns:DownloadFiles">
+      <class ref="com.mediafile.classes.generated.soap.DownloadFiles"/>
+    </bindings>
+    <bindings scd="~tns:Login">
+      <class ref="com.mediafile.classes.generated.soap.Login"/>
+    </bindings>
+    <bindings scd="~tns:Register">
+      <class ref="com.mediafile.classes.generated.soap.Register"/>
+    </bindings>
+    <bindings scd="~tns:GetFiles">
+      <class ref="com.mediafile.classes.generated.soap.GetFiles"/>
+    </bindings>
+    <bindings scd="~tns:ShareFile">
+      <class ref="com.mediafile.classes.generated.soap.ShareFile"/>
+    </bindings>
+    <bindings scd="~tns:UploadFile">
+      <class ref="com.mediafile.classes.generated.soap.UploadFile"/>
+    </bindings>
+    <bindings scd="~tns:DeleteFile">
+      <class ref="com.mediafile.classes.generated.soap.DeleteFile"/>
+    </bindings>
+    <bindings scd="~tns:MoveFile">
+      <class ref="com.mediafile.classes.generated.soap.MoveFile"/>
+    </bindings>
+    <bindings scd="~tns:EditFile">
+      <class ref="com.mediafile.classes.generated.soap.EditFile"/>
+    </bindings>
+    <bindings scd="~tns:ShareFolder">
+      <class ref="com.mediafile.classes.generated.soap.ShareFolder"/>
+    </bindings>
+    <bindings scd="~tns:DeleteFolder">
+      <class ref="com.mediafile.classes.generated.soap.DeleteFolder"/>
+    </bindings>
+    <bindings scd="~tns:MoveFolder">
+      <class ref="com.mediafile.classes.generated.soap.MoveFolder"/>
+    </bindings>
+    <bindings scd="~tns:CreateFolder">
+      <class ref="com.mediafile.classes.generated.soap.CreateFolder"/>
+    </bindings>
+    <bindings scd="~tns:RenameFolder">
+      <class ref="com.mediafile.classes.generated.soap.RenameFolder"/>
+    </bindings>
+    <bindings scd="~tns:LoginResponse">
+      <class ref="com.mediafile.classes.generated.soap.LoginResponse"/>
+    </bindings>
+    <bindings scd="~tns:RegisterResponse">
+      <class ref="com.mediafile.classes.generated.soap.RegisterResponse"/>
+    </bindings>
+    <bindings scd="~tns:ShareFileResponse">
+      <class ref="com.mediafile.classes.generated.soap.ShareFileResponse"/>
+    </bindings>
+    <bindings scd="~tns:UploadFileResponse">
+      <class ref="com.mediafile.classes.generated.soap.UploadFileResponse"/>
+    </bindings>
+    <bindings scd="~tns:DeleteFileResponse">
+      <class ref="com.mediafile.classes.generated.soap.DeleteFileResponse"/>
+    </bindings>
+    <bindings scd="~tns:MoveFileResponse">
+      <class ref="com.mediafile.classes.generated.soap.MoveFileResponse"/>
+    </bindings>
+    <bindings scd="~tns:EditFileResponse">
+      <class ref="com.mediafile.classes.generated.soap.EditFileResponse"/>
+    </bindings>
+    <bindings scd="~tns:DownloadFilesResponse">
+      <class ref="com.mediafile.classes.generated.soap.DownloadFilesResponse"/>
+    </bindings>
+    <bindings scd="~tns:ShareFolderResponse">
+      <class ref="com.mediafile.classes.generated.soap.ShareFolderResponse"/>
+    </bindings>
+    <bindings scd="~tns:DeleteFolderResponse">
+      <class ref="com.mediafile.classes.generated.soap.DeleteFolderResponse"/>
+    </bindings>
+    <bindings scd="~tns:MoveFolderResponse">
+      <class ref="com.mediafile.classes.generated.soap.MoveFolderResponse"/>
+    </bindings>
+    <bindings scd="~tns:CreateFolderResponse">
+      <class ref="com.mediafile.classes.generated.soap.CreateFolderResponse"/>
+    </bindings>
+    <bindings scd="~tns:RenameFolderResponse">
+      <class ref="com.mediafile.classes.generated.soap.RenameFolderResponse"/>
+    </bindings>
+    <bindings scd="~tns:FolderInfo">
+      <class ref="com.mediafile.classes.generated.soap.FolderInfo"/>
+    </bindings>
+    <bindings scd="~tns:FileInfo">
+      <class ref="com.mediafile.classes.generated.soap.FileInfo"/>
+    </bindings>
+    <bindings scd="~tns:File">
+      <class ref="com.mediafile.classes.generated.soap.File"/>
+    </bindings>
+    <bindings scd="~tns:Identifiers">
+      <class ref="com.mediafile.classes.generated.soap.Identifiers"/>
+    </bindings>
+    <bindings scd="~tns:Errors">
+      <class ref="com.mediafile.classes.generated.soap.Errors"/>
+    </bindings>
+    <bindings scd="~tns:FilesInfo">
+      <class ref="com.mediafile.classes.generated.soap.FilesInfo"/>
+    </bindings>
+    <bindings scd="~tns:Files">
+      <class ref="com.mediafile.classes.generated.soap.Files"/>
+    </bindings>
+    <bindings scd="~tns:Folders">
+      <class ref="com.mediafile.classes.generated.soap.Folders"/>
+    </bindings>
+    <bindings scd="~tns:FileType">
+      <typesafeEnumClass ref="com.mediafile.classes.generated.soap.FileType"/>
+    </bindings>
+  </bindings>
+</bindings>
+
