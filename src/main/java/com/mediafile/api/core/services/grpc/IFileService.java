@@ -1,0 +1,43 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
+package com.mediafile.api.core.services.grpc;
+
+import com.google.protobuf.ByteString;
+
+/**
+ *
+ * @author 000430063
+ */
+public interface IFileService {
+    
+    /**
+     *  
+     * @param b64File file in base64 format
+     * @return uuid string
+     */
+    public String uploadFile(String b64File);
+    
+    /**
+     *
+     * @param fileId uuid string
+     * @return file in base64 format
+     */
+    public String getFile(String fileId);
+    
+    /**
+     *
+     * @param b64File file in base64 format
+     * @return uuid string
+     */
+    public String uploadFileAsync(String b64File);
+    
+    /**
+     *
+     * @param fileId uuid string
+     * @return file in base64 format
+     */
+    public String getFileAsync(String fileId);
+    
+}
