@@ -17,6 +17,9 @@ import com.mediafile.classes.generated.soap.RenameFolderResponse;
 import com.mediafile.classes.generated.soap.ShareFolder;
 import com.mediafile.classes.generated.soap.ShareFolderResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
+import org.springframework.ws.server.endpoint.annotation.RequestPayload;
+import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 /**
  *
@@ -24,6 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class FolderEndpoint implements IFolderEndpoint {
         
+    private static final String NAMESPACE_URI = "http://www.generated.classes.mediafile.com/soap";
+    
     private final IUserService userService;
     private final IMetadataService metadataService;
     
@@ -34,27 +39,37 @@ public class FolderEndpoint implements IFolderEndpoint {
     }
     
     @Override
-    public ShareFolderResponse shareFolder(ShareFolder request) {
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ShareFolder")
+    public ShareFolderResponse shareFolder(@RequestPayload ShareFolder request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public DeleteFolderResponse deleteFolder(DeleteFolder request) {
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteFolder")
+    public DeleteFolderResponse deleteFolder(@RequestPayload DeleteFolder request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public MoveFolderResponse moveFolder(MoveFolder request) {
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "MoveFolder")
+    public MoveFolderResponse moveFolder(@RequestPayload MoveFolder request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public CreateFolderResponse createFolder(CreateFolder request) {
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "CreateFolder")
+    public CreateFolderResponse createFolder(@RequestPayload CreateFolder request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public RenameFolderResponse renameFOlder(RenameFolder request) {
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "RenameFolder")
+    public RenameFolderResponse renameFOlder(@RequestPayload RenameFolder request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

@@ -4,11 +4,12 @@
  */
 package com.mediafile.api.core.endpoints.user;
 
+import com.mediafile.classes.generated.soap.GetUser;
+import com.mediafile.classes.generated.soap.GetUserResponse;
 import com.mediafile.classes.generated.soap.Login;
 import com.mediafile.classes.generated.soap.LoginResponse;
 import com.mediafile.classes.generated.soap.Register;
 import com.mediafile.classes.generated.soap.RegisterResponse;
-import com.mediafile.rmi.classes.User;
 
 /**
  *
@@ -20,6 +21,6 @@ public interface IUserEndpoint {
     
     public RegisterResponse register(Register request);
     
-    public User getUser(String id); 
+    public GetUserResponse getUser(GetUser request); 
     
 }

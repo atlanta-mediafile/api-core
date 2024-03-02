@@ -22,6 +22,9 @@ import com.mediafile.classes.generated.soap.ShareFileResponse;
 import com.mediafile.classes.generated.soap.UploadFile;
 import com.mediafile.classes.generated.soap.UploadFileResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
+import org.springframework.ws.server.endpoint.annotation.RequestPayload;
+import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 /**
  *
@@ -29,6 +32,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class FileEndpoint implements IFileEndpoint {
    
+    private static final String NAMESPACE_URI = "http://www.generated.classes.mediafile.com/soap";
+    
     private final IUserService userService;
     private final IMetadataService metadataService;
     private final IFileService fileService;
@@ -41,37 +46,51 @@ public class FileEndpoint implements IFileEndpoint {
     }
     
     @Override
-    public GetFilesResponse getFiles(GetFiles request) {
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetFiles")
+    public GetFilesResponse getFiles(@RequestPayload GetFiles request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ShareFileResponse shareFile(ShareFile request) {
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ShareFile")
+    public ShareFileResponse shareFile(@RequestPayload ShareFile request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public UploadFileResponse uploadFile(UploadFile request) {
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "UploadFile")
+    public UploadFileResponse uploadFile(@RequestPayload UploadFile request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public DeleteFileResponse deleteFile(DeleteFile request) {
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteFile")
+    public DeleteFileResponse deleteFile(@RequestPayload DeleteFile request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public MoveFileResponse moveFile(MoveFile request) {
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "MoveFile")
+    public MoveFileResponse moveFile(@RequestPayload MoveFile request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public EditFileResponse editFile(EditFile request) {
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "EditFile")
+    public EditFileResponse editFile(@RequestPayload EditFile request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public DownloadFilesResponse downloadFile(DownloadFiles request) {
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DownloadFiles")
+    public DownloadFilesResponse downloadFile(@RequestPayload DownloadFiles request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
