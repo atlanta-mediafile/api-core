@@ -23,6 +23,10 @@ public class FileService implements IFileService {
     private final FileServiceStub asyncStub;
     private final Channel channel;
     
+    public FileService(){
+        this("localhost", 5010);
+    }
+    
     public FileService(String host, int port) {
         this(ManagedChannelBuilder.forAddress(host, port).usePlaintext());
     }
