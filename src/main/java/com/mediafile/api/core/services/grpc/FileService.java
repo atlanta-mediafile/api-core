@@ -9,12 +9,14 @@ import com.mediafile.classes.generated.grpc.FileServiceGrpc.FileServiceBlockingS
 import com.mediafile.classes.generated.grpc.FileServiceGrpc.FileServiceStub;
 import io.grpc.Channel;
 import io.grpc.ManagedChannelBuilder;
+import org.springframework.stereotype.Component;
 
 
 /**
  *
  * @author Dego
  */
+@Component
 public class FileService implements IFileService {
     
     private final FileServiceBlockingStub blockingStub;

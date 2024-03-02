@@ -23,7 +23,7 @@ import com.mediafile.classes.generated.soap.UploadFileResponse;
  *
  * @author 000430063
  */
-public interface IFileService {
+public interface IFileEndpoint {
     
     public GetFilesResponse getFiles(GetFiles request);
 

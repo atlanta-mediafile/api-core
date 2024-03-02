@@ -13,7 +13,7 @@ import com.mediafile.rmi.classes.args.RegisterArgs;
  *
  * @author 000430063
  */
-public interface IAuthService {
+public interface IUserService {
     
     public Response<Boolean> Auth(String string);
 

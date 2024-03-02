@@ -13,23 +13,25 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import org.springframework.stereotype.Component;
 
 
 /**
  *
  * @author Dego
  */
-public class AuthService extends Thread implements IAuthService {
+@Component
+public class UserService extends Thread implements IUserService {
 
     private final String host;
     private final int port;
     private IAuthProvider auhtProvider;
     
-    public AuthService(){
+    public UserService(){
         this("localhost", 3000);
     }
     
-    public AuthService(String host, int port){
+    public UserService(String host, int port){
         this.host = host;
         this.port = port;
         try{

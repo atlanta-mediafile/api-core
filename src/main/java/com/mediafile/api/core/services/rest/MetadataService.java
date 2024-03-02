@@ -4,10 +4,13 @@
  */
 package com.mediafile.api.core.services.rest;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author 000430063
  */
+@Component
 public class MetadataService implements IMetadataService {
     
 }
