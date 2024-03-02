@@ -105,6 +105,7 @@
                     </sources>
                     <outputDirectory>src/main/java</outputDirectory>
                     <clearOutputDir>false</clearOutputDir>
+                    <episode>false</episode>
                 </configuration>
             </plugin>
             
