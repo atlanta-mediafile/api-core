@@ -4,7 +4,9 @@
  */
 package com.mediafile.api.core.endpoints.user;
 
-import com.mediafile.api.core.services.rmi.IUserService;
+import com.mediafile.api.core.services.user.GetUserService;
+import com.mediafile.api.core.services.user.LoginService;
+import com.mediafile.api.core.services.user.RegisterService;
 import com.mediafile.api.core.utils.Mapper;
 import com.mediafile.classes.generated.soap.GetUser;
 import com.mediafile.classes.generated.soap.GetUserResponse;
@@ -12,9 +14,7 @@ import com.mediafile.classes.generated.soap.Login;
 import com.mediafile.classes.generated.soap.LoginResponse;
 import com.mediafile.classes.generated.soap.Register;
 import com.mediafile.classes.generated.soap.RegisterResponse;
-import com.mediafile.rmi.classes.Response;
 import com.mediafile.rmi.classes.User;
-import com.mediafile.rmi.classes.args.LoginArgs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -31,7 +31,12 @@ public class UserEndpoint implements IUserEndpoint {
     private static final String NAMESPACE_URI = "http://www.generated.classes.mediafile.com/soap";
     
     @Autowired
-    private IUserService userService;
+    private GetUserService getUserService;
+    @Autowired
+    private LoginService loginService;
+    @Autowired
+    private RegisterService registerService;
+    
     
     @Override
     @ResponsePayload
@@ -43,14 +48,14 @@ public class UserEndpoint implements IUserEndpoint {
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "Register")
-    public RegisterResponse register(Register request) {
+    public RegisterResponse register(@RequestPayload Register request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetUser")
-    public GetUserResponse getUser(GetUser request) {
+    public GetUserResponse getUser(@RequestPayload GetUser request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

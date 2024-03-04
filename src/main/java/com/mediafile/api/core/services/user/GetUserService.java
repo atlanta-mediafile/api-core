@@ -4,13 +4,13 @@
  */
 package com.mediafile.api.core.services.user;
 
-import com.mediafile.api.core.repositories.grpc.IFileService;
-import com.mediafile.api.core.repositories.rest.IMetadataService;
-import com.mediafile.api.core.repositories.rmi.IUserService;
 import com.mediafile.rmi.classes.Response;
 import com.mediafile.rmi.classes.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.mediafile.api.core.repositories.grpc.IFileRepository;
+import com.mediafile.api.core.repositories.rest.IMetadataRepository;
+import com.mediafile.api.core.repositories.rmi.IUserRepository;
 
 /**
  *
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 public class GetUserService {
     
     @Autowired
-    private IUserService userService;
+    private IUserRepository userService;
     
     public User getUser(){
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

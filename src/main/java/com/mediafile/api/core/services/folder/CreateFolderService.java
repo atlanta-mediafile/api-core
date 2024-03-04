@@ -4,10 +4,10 @@
  */
 package com.mediafile.api.core.services.folder;
 
-import com.mediafile.api.core.repositories.grpc.IFileService;
-import com.mediafile.api.core.repositories.rest.IMetadataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.mediafile.api.core.repositories.grpc.IFileRepository;
+import com.mediafile.api.core.repositories.rest.IMetadataRepository;
 
 /**
  *
@@ -17,9 +17,9 @@ import org.springframework.stereotype.Component;
 public class CreateFolderService {
     
     @Autowired
-    private IMetadataService metadataService;
+    private IMetadataRepository metadataService;
     @Autowired
-    private IFileService fileService;
+    private IFileRepository fileService;
     
     public boolean createFolder() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

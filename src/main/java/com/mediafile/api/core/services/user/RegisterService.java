@@ -4,10 +4,10 @@
  */
 package com.mediafile.api.core.services.user;
 
-import com.mediafile.api.core.repositories.rmi.IUserService;
 import com.mediafile.rmi.classes.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.mediafile.api.core.repositories.rmi.IUserRepository;
 
 /**
  *
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class RegisterService {
     
     @Autowired
-    private IUserService userService;
+    private IUserRepository userService;
     
     public String register(){
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
