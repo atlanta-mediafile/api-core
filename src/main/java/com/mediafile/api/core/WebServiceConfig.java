@@ -4,11 +4,10 @@
  */
 package com.mediafile.api.core;
 
-import com.mediafile.api.core.services.grpc.FileService;
-import com.mediafile.api.core.services.grpc.IFileService;
-import com.mediafile.api.core.services.rest.IMetadataService;
-import com.mediafile.api.core.services.rest.MetadataService;
-import com.mediafile.api.core.services.rmi.UserService;
+import com.mediafile.api.core.services.user.GetUserService;
+import com.mediafile.api.core.repositories.grpc.FileRepository;
+import com.mediafile.api.core.repositories.rest.MetadataRepository;
+import com.mediafile.api.core.repositories.rmi.UserRepository;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +18,9 @@ import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
-import com.mediafile.api.core.services.rmi.IUserService;
+import com.mediafile.api.core.repositories.grpc.IFileRepository;
+import com.mediafile.api.core.repositories.rest.IMetadataRepository;
+import com.mediafile.api.core.repositories.rmi.IUserRepository;
 
 /**
  *
@@ -48,18 +49,23 @@ public class WebServiceConfig {
     }
     
     @Bean
-    public IUserService getAuthService(){
-        return new UserService();
+    public GetUserService getUserController(){
+        return new GetUserService();
     }
     
     @Bean
-    public IFileService getFileService(){
-        return new FileService("localhost", 3000);
+    public IUserRepository getAuthService(){
+        return new UserRepository();
     }
     
     @Bean
-    public IMetadataService getMetadatService(){
-        return new MetadataService();
+    public IFileRepository getFileService(){
+        return new FileRepository();
+    }
+    
+    @Bean
+    public IMetadataRepository getMetadatService(){
+        return new MetadataRepository();
     }
     
     @Bean

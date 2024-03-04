@@ -19,4 +19,10 @@ public class Mapper {
         return listE;
     }
     
+    public static Errors getErrors(String error){
+        Errors listE = new Errors();
+        listE.getError().addAll(Arrays.asList(new String[]{error}));
+        return listE;
+    }
+    
 }
