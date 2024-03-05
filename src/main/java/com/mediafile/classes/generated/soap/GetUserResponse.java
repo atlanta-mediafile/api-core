@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por Eclipse Implementation of JAXB v3.0.0 
 // Visite https://eclipse-ee4j.github.io/jaxb-ri 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2024.03.02 a las 02:38:04 PM COT 
+// Generado el: 2024.03.03 a las 09:04:57 PM CST 
 //
 
 
@@ -33,8 +33,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *                 &lt;sequence&gt;
  *                   &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *                   &lt;element name="fullname" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *                   &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *                   &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *                 &lt;/sequence&gt;
  *               &lt;/restriction&gt;
  *             &lt;/complexContent&gt;
@@ -139,8 +139,8 @@ public class GetUserResponse {
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
      *       &lt;sequence&gt;
      *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+     *         &lt;element name="fullname" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
      *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
-     *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
      *       &lt;/sequence&gt;
      *     &lt;/restriction&gt;
      *   &lt;/complexContent&gt;
@@ -152,17 +152,17 @@ public class GetUserResponse {
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
         "username",
-        "email",
-        "password"
+        "fullname",
+        "email"
     })
     public static class Data {
 
         @XmlElement(required = true)
         protected String username;
         @XmlElement(required = true)
-        protected String email;
+        protected String fullname;
         @XmlElement(required = true)
-        protected String password;
+        protected String email;
 
         /**
          * Obtiene el valor de la propiedad username.
@@ -189,6 +189,30 @@ public class GetUserResponse {
         }
 
         /**
+         * Obtiene el valor de la propiedad fullname.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getFullname() {
+            return fullname;
+        }
+
+        /**
+         * Define el valor de la propiedad fullname.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setFullname(String value) {
+            this.fullname = value;
+        }
+
+        /**
          * Obtiene el valor de la propiedad email.
          * 
          * @return
@@ -210,30 +234,6 @@ public class GetUserResponse {
          */
         public void setEmail(String value) {
             this.email = value;
-        }
-
-        /**
-         * Obtiene el valor de la propiedad password.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
-         */
-        public String getPassword() {
-            return password;
-        }
-
-        /**
-         * Define el valor de la propiedad password.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
-         */
-        public void setPassword(String value) {
-            this.password = value;
         }
 
     }

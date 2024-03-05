@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mediafile.api.core.services.grpc;
+package com.mediafile.api.core.repositories.grpc;
 
 import com.mediafile.classes.generated.grpc.FileServiceGrpc;
 import com.mediafile.classes.generated.grpc.FileServiceGrpc.FileServiceBlockingStub;
@@ -17,21 +17,21 @@ import org.springframework.stereotype.Component;
  * @author Dego
  */
 @Component
-public class FileService implements IFileService {
+public class FileRepository implements IFileRepository {
     
     private final FileServiceBlockingStub blockingStub;
     private final FileServiceStub asyncStub;
     private final Channel channel;
     
-    public FileService(){
+    public FileRepository(){
         this("localhost", 5010);
     }
     
-    public FileService(String host, int port) {
+    public FileRepository(String host, int port) {
         this(ManagedChannelBuilder.forAddress(host, port).usePlaintext());
     }
     
-    public FileService(ManagedChannelBuilder<?> channelBuilder) {
+    public FileRepository(ManagedChannelBuilder<?> channelBuilder) {
         this.channel         = channelBuilder.build();
         this.blockingStub    = FileServiceGrpc.newBlockingStub(channel);
         this.asyncStub       = FileServiceGrpc.newStub(channel);

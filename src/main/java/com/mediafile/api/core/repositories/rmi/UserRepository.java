@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mediafile.api.core.services.rmi;
+package com.mediafile.api.core.repositories.rmi;
 
 import com.mediafile.rmi.classes.Response;
 import com.mediafile.rmi.classes.User;
@@ -21,17 +21,17 @@ import org.springframework.stereotype.Component;
  * @author Dego
  */
 @Component
-public class UserService extends Thread implements IUserService {
+public class UserRepository extends Thread implements IUserRepository {
 
     private final String host;
     private final int port;
     private IAuthProvider auhtProvider;
     
-    public UserService(){
-        this("localhost", 3000);
+    public UserRepository(){
+        this("localhost", 3001);
     }
     
-    public UserService(String host, int port){
+    public UserRepository(String host, int port){
         this.host = host;
         this.port = port;
         try{
@@ -48,7 +48,7 @@ public class UserService extends Thread implements IUserService {
     }
 
     @Override
-    public Response<User> GetUser(String string) {
+    public Response<User> GetUser(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

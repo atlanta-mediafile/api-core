@@ -4,9 +4,6 @@
  */
 package com.mediafile.api.core.endpoints.file;
 
-import com.mediafile.api.core.services.grpc.IFileService;
-import com.mediafile.api.core.services.rest.IMetadataService;
-import com.mediafile.api.core.services.rmi.IUserService;
 import com.mediafile.classes.generated.soap.DeleteFile;
 import com.mediafile.classes.generated.soap.DeleteFileResponse;
 import com.mediafile.classes.generated.soap.DownloadFiles;
@@ -25,6 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+import com.mediafile.api.core.repositories.grpc.IFileRepository;
+import com.mediafile.api.core.repositories.rest.IMetadataRepository;
+import com.mediafile.api.core.repositories.rmi.IUserRepository;
 
 /**
  *
@@ -34,12 +34,12 @@ public class FileEndpoint implements IFileEndpoint {
    
     private static final String NAMESPACE_URI = "http://www.generated.classes.mediafile.com/soap";
     
-    private final IUserService userService;
-    private final IMetadataService metadataService;
-    private final IFileService fileService;
+    private final IUserRepository userService;
+    private final IMetadataRepository metadataService;
+    private final IFileRepository fileService;
     
     @Autowired
-    public FileEndpoint(IUserService userService, IMetadataService metadataService, IFileService fileService) {
+    public FileEndpoint(IUserRepository userService, IMetadataRepository metadataService, IFileRepository fileService) {
         this.userService = userService;
         this.metadataService = metadataService;
         this.fileService = fileService;

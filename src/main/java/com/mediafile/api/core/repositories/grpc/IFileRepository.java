@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package com.mediafile.api.core.services.grpc;
+package com.mediafile.api.core.repositories.grpc;
 
 import com.google.protobuf.ByteString;
 
@@ -10,7 +10,7 @@ import com.google.protobuf.ByteString;
  *
  * @author 000430063
  */
-public interface IFileService {
+public interface IFileRepository {
     
     /**
      *  
