@@ -7,7 +7,7 @@ package com.mediafile.api.core.services.folder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.grpc.IFileRepository;
-import com.mediafile.api.core.repositories.rest.IMetadataRepository;
+import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 
 /**
  *
@@ -17,7 +17,7 @@ import com.mediafile.api.core.repositories.rest.IMetadataRepository;
 public class CreateFolderService {
     
     @Autowired
-    private IMetadataRepository metadataService;
+    private IFileRepository metadataService;
     @Autowired
     private IFileRepository fileService;
     

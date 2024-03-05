@@ -6,7 +6,7 @@ package com.mediafile.api.core;
 
 import com.mediafile.api.core.services.user.GetUserService;
 import com.mediafile.api.core.repositories.grpc.FileRepository;
-import com.mediafile.api.core.repositories.rest.MetadataRepository;
+import com.mediafile.api.core.repositories.rest.FileDataRepository;
 import com.mediafile.api.core.repositories.rmi.UserRepository;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
@@ -19,8 +19,10 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 import com.mediafile.api.core.repositories.grpc.IFileRepository;
-import com.mediafile.api.core.repositories.rest.IMetadataRepository;
+import com.mediafile.api.core.repositories.rest.FolderDataRepository;
 import com.mediafile.api.core.repositories.rmi.IUserRepository;
+import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
 
 /**
  *
@@ -64,12 +66,22 @@ public class WebServiceConfig {
     }
     
     @Bean
-    public IMetadataRepository getMetadatService(){
-        return new MetadataRepository();
+    public IFileRepository getMetadatService(){
+        return new FileRepository();
     }
     
     @Bean
-    public XsdSchema songsSchema() {
+    public IFileDataRepository getFileDataRepository(){
+        return new FileDataRepository();
+    }
+    
+    @Bean
+    public IFolderDataRepository getFolderDataRepository(){
+        return new FolderDataRepository();
+    }
+    
+    @Bean
+    public XsdSchema mediafileSchema() {
         return new SimpleXsdSchema(new ClassPathResource("soap/mediafileTypes.xsd"));
     }
     
