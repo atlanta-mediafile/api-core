@@ -6,6 +6,7 @@ package com.mediafile.api.core.repositories.rest;
 
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class FileDataRepository implements IFileDataRepository {
-
+  
     @Override
     public Response<File> getFile(String userId, String fileId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
