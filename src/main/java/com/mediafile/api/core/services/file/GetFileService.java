@@ -8,7 +8,7 @@ import com.mediafile.classes.generated.soap.GetFilesResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.grpc.IFileRepository;
-import com.mediafile.api.core.repositories.rest.IMetadataRepository;
+import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 
 /**
  *
@@ -18,7 +18,7 @@ import com.mediafile.api.core.repositories.rest.IMetadataRepository;
 public class GetFileService {
     
     @Autowired
-    private IMetadataRepository metadataService;
+    private IFileRepository metadataService;
     @Autowired
     private IFileRepository fileService;
     

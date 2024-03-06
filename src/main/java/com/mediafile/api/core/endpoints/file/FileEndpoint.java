@@ -23,8 +23,8 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import com.mediafile.api.core.repositories.grpc.IFileRepository;
-import com.mediafile.api.core.repositories.rest.IMetadataRepository;
 import com.mediafile.api.core.repositories.rmi.IUserRepository;
+import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 
 /**
  *
@@ -35,11 +35,11 @@ public class FileEndpoint implements IFileEndpoint {
     private static final String NAMESPACE_URI = "http://www.generated.classes.mediafile.com/soap";
     
     private final IUserRepository userService;
-    private final IMetadataRepository metadataService;
+    private final IFileRepository metadataService;
     private final IFileRepository fileService;
     
     @Autowired
-    public FileEndpoint(IUserRepository userService, IMetadataRepository metadataService, IFileRepository fileService) {
+    public FileEndpoint(IUserRepository userService, IFileRepository metadataService, IFileRepository fileService) {
         this.userService = userService;
         this.metadataService = metadataService;
         this.fileService = fileService;

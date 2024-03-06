@@ -6,7 +6,7 @@ package com.mediafile.api.core;
 
 import com.mediafile.api.core.services.user.GetUserService;
 import com.mediafile.api.core.repositories.grpc.FileRepository;
-import com.mediafile.api.core.repositories.rest.MetadataRepository;
+import com.mediafile.api.core.repositories.rest.FileDataRepository;
 import com.mediafile.api.core.repositories.rmi.UserRepository;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
@@ -19,8 +19,11 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 import com.mediafile.api.core.repositories.grpc.IFileRepository;
-import com.mediafile.api.core.repositories.rest.IMetadataRepository;
+import com.mediafile.api.core.repositories.rest.FolderDataRepository;
 import com.mediafile.api.core.repositories.rmi.IUserRepository;
+import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  *
@@ -28,7 +31,7 @@ import com.mediafile.api.core.repositories.rmi.IUserRepository;
  */
 @EnableWs
 @Configuration
-public class WebServiceConfig {
+public class WebServiceConfig implements WebMvcConfigurer  {
     
     @Bean
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
@@ -49,27 +52,32 @@ public class WebServiceConfig {
     }
     
     @Bean
-    public GetUserService getUserController(){
+    public GetUserService getUserService(){
         return new GetUserService();
     }
     
     @Bean
-    public IUserRepository getAuthService(){
-        return new UserRepository();
+    public IUserRepository getUserRepository(){
+        return new UserRepository("localhost", 3000);
     }
     
     @Bean
-    public IFileRepository getFileService(){
-        return new FileRepository();
+    public IFileRepository getFileRepository(){
+        return new FileRepository("localhost", 5010);
     }
     
     @Bean
-    public IMetadataRepository getMetadatService(){
-        return new MetadataRepository();
+    public IFileDataRepository getFileDataRepository(){
+        return new FileDataRepository();
     }
     
     @Bean
-    public XsdSchema songsSchema() {
+    public IFolderDataRepository getFolderDataRepository(){
+        return new FolderDataRepository();
+    }
+    
+    @Bean
+    public XsdSchema mediafileSchema() {
         return new SimpleXsdSchema(new ClassPathResource("soap/mediafileTypes.xsd"));
     }
     

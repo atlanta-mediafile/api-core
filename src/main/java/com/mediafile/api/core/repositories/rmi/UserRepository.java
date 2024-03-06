@@ -20,7 +20,6 @@ import org.springframework.stereotype.Component;
  *
  * @author Dego
  */
-@Component
 public class UserRepository extends Thread implements IUserRepository {
 
     private final String host;
@@ -28,7 +27,7 @@ public class UserRepository extends Thread implements IUserRepository {
     private IAuthProvider auhtProvider;
     
     public UserRepository(){
-        this("localhost", 3001);
+        this("localhost", 3000);
     }
     
     public UserRepository(String host, int port){

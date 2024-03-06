@@ -17,4 +17,5 @@ buildNumber.properties
 .classpath
 
 src/main/java/META-INF
-src/main/java/com/mediafile/classes/generated
+src/main/java/com/mediafile/classes/generated/grpc/*.java
+src/main/java/com/mediafile/classes/generated/soap/*.java

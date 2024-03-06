@@ -18,8 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import com.mediafile.api.core.repositories.rest.IMetadataRepository;
 import com.mediafile.api.core.repositories.rmi.IUserRepository;
+import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 
 /**
  *
