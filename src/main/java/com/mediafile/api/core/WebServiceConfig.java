@@ -4,7 +4,6 @@
  */
 package com.mediafile.api.core;
 
-import com.mediafile.api.core.interceptors.HandleAuth;
 import com.mediafile.api.core.services.user.GetUserService;
 import com.mediafile.api.core.repositories.grpc.FileRepository;
 import com.mediafile.api.core.repositories.rest.FileDataRepository;
@@ -24,8 +23,6 @@ import com.mediafile.api.core.repositories.rest.FolderDataRepository;
 import com.mediafile.api.core.repositories.rmi.IUserRepository;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
