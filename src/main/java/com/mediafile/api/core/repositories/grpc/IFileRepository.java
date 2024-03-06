@@ -14,10 +14,10 @@ public interface IFileRepository {
     
     /**
      *  
-     * @param b64File file in base64 format
+     * @param fileBytes file bytes
      * @return uuid string
      */
-    public String uploadFile(String b64File);
+    public String uploadFile(byte[] fileBytes);
     
     /**
      *

@@ -22,28 +22,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import com.mediafile.api.core.repositories.grpc.IFileRepository;
-import com.mediafile.api.core.repositories.rmi.IUserRepository;
-import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import com.mediafile.api.core.services.file.UploadFileService;
+import com.mediafile.api.core.utils.Mapper;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
 
 /**
  *
  * @author 000430063
  */
+@Endpoint
 public class FileEndpoint implements IFileEndpoint {
    
     private static final String NAMESPACE_URI = "http://www.generated.classes.mediafile.com/soap";
     
-    private final IUserRepository userService;
-    private final IFileRepository metadataService;
-    private final IFileRepository fileService;
-    
     @Autowired
-    public FileEndpoint(IUserRepository userService, IFileRepository metadataService, IFileRepository fileService) {
-        this.userService = userService;
-        this.metadataService = metadataService;
-        this.fileService = fileService;
-    }
+    private UploadFileService uploadFile;
     
     @Override
     @ResponsePayload
@@ -63,7 +56,16 @@ public class FileEndpoint implements IFileEndpoint {
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "UploadFile")
     public UploadFileResponse uploadFile(@RequestPayload UploadFile request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean res = uploadFile.uploadFile(request);
+        
+        UploadFileResponse response = new UploadFileResponse();
+        response.setSuccess(res);
+        
+        if(!res) {
+            response.setErrors(Mapper.getErrors("No se pudo crear el archivo"));
+        }
+        
+        return response;
     }
 
     @Override

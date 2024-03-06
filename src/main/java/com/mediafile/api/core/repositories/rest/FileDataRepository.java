@@ -6,14 +6,14 @@ package com.mediafile.api.core.repositories.rest;
 
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import org.springframework.stereotype.Component;
 
 /**
  *
  * @author 000430063
  */
-@Component
 public class FileDataRepository implements IFileDataRepository {
   
     @Override
@@ -37,8 +37,17 @@ public class FileDataRepository implements IFileDataRepository {
     }
 
     @Override
-    public Response<File> editMetadata(String userId, File newFile) {
+    public Response<File> editMetadata(String userId, String name, String extension) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Response<String> saveMetadata(String userId, File newFile) {
+        try {
+            return (Response<String>) Request.Post("http://localhost:3001/file", this, Response.class);
+        } catch (URISyntaxException | IOException | InterruptedException ex) {
+        return new Response<>(new String[0], false, null);
+        }
     }
     
 }
