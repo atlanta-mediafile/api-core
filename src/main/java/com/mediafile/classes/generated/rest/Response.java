@@ -12,9 +12,15 @@ import java.io.Serializable;
  */
 public class Response<T> implements Serializable {
     
-    private String[] errors;
-    private boolean success;
-    private T data;
+    private final String[] errors;
+    private final boolean success;
+    private final T data;
+    
+    public Response(String[] errors, boolean success, T data){
+        this.errors = errors;
+        this.success = success;
+        this.data = data;
+    }
 
     public String[] getErrors() {
         return errors;

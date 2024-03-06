@@ -42,9 +42,9 @@ public class FileRepository implements IFileRepository {
     }
     
     @Override
-    public String uploadFile(String b64File) {
+    public String uploadFile(byte[] fileBytes) {
         
-        ByteString byteString = ByteString.copyFrom(Base64.getDecoder().decode(b64File));
+        ByteString byteString = ByteString.copyFrom(fileBytes);
         
         var request = UploadSingleFileRequest
                 .newBuilder()

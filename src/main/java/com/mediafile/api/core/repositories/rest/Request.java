@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 
 /**
  *
@@ -30,6 +31,7 @@ public class Request {
             .uri(new URI(uri))
             .headers("Content-Type", "application/json;charset=UTF-8")
             .POST(HttpRequest.BodyPublishers.ofString(json))
+            .timeout(Duration.ofSeconds(10))
             .build();
         
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());

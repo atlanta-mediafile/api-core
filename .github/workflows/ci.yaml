@@ -75,3 +75,30 @@ jobs:
           type: now
           target_branch: main
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          
+  release:
+    runs-on: ubuntu-latest
+    needs: [version]
+    if: success()
+    permissions: 
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download jar
+        uses: actions/download-artifact@v4
+        with:
+          name: app-jar
+          path: .
+
+      - name: Rename Jar
+        run: mv ./api-core-1.0-SNAPSHOT.jar ./api-core-${{ needs.version.outputs.new_version }}.jar
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: v${{ needs.version.outputs.new_version }}
+          tag_name: ${{ needs.version.outputs.new_version }}
+          files: |
+            ./api-core-${{ needs.version.outputs.new_version }}.jar
