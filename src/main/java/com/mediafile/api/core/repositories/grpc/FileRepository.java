@@ -4,11 +4,16 @@
  */
 package com.mediafile.api.core.repositories.grpc;
 
+import com.google.protobuf.ByteString;
 import com.mediafile.classes.generated.grpc.FileServiceGrpc;
 import com.mediafile.classes.generated.grpc.FileServiceGrpc.FileServiceBlockingStub;
 import com.mediafile.classes.generated.grpc.FileServiceGrpc.FileServiceStub;
+import com.mediafile.classes.generated.grpc.FileServiceOuterClass;
+import com.mediafile.classes.generated.grpc.FileServiceOuterClass.UploadSingleFileRequest;
+import com.mediafile.classes.generated.grpc.FileServiceOuterClass.UploadSingleFileResponse;
 import io.grpc.Channel;
 import io.grpc.ManagedChannelBuilder;
+import java.util.Base64;
 import org.springframework.stereotype.Component;
 
 
@@ -16,10 +21,9 @@ import org.springframework.stereotype.Component;
  *
  * @author Dego
  */
-@Component
 public class FileRepository implements IFileRepository {
     
-    private final FileServiceBlockingStub blockingStub;
+    private final FileServiceBlockingStub stub;
     private final FileServiceStub asyncStub;
     private final Channel channel;
     
@@ -32,14 +36,22 @@ public class FileRepository implements IFileRepository {
     }
     
     public FileRepository(ManagedChannelBuilder<?> channelBuilder) {
-        this.channel         = channelBuilder.build();
-        this.blockingStub    = FileServiceGrpc.newBlockingStub(channel);
-        this.asyncStub       = FileServiceGrpc.newStub(channel);
+        this.channel    = channelBuilder.build();
+        this.stub       = FileServiceGrpc.newBlockingStub(channel);
+        this.asyncStub  = FileServiceGrpc.newStub(channel);
     }
     
     @Override
     public String uploadFile(String b64File) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        ByteString byteString = ByteString.copyFrom(Base64.getDecoder().decode(b64File));
+        
+        var request = UploadSingleFileRequest
+                .newBuilder()
+                .setFile(byteString).build();
+        
+        var response = stub.uploadSingleFile(request);
+        return response.getFileId();
     }
 
     @Override

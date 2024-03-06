@@ -4,6 +4,7 @@
  */
 package com.mediafile.api.core;
 
+import com.mediafile.api.core.interceptors.HandleAuth;
 import com.mediafile.api.core.services.user.GetUserService;
 import com.mediafile.api.core.repositories.grpc.FileRepository;
 import com.mediafile.api.core.repositories.rest.FileDataRepository;
@@ -23,6 +24,8 @@ import com.mediafile.api.core.repositories.rest.FolderDataRepository;
 import com.mediafile.api.core.repositories.rmi.IUserRepository;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  *
@@ -30,7 +33,12 @@ import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
  */
 @EnableWs
 @Configuration
-public class WebServiceConfig {
+public class WebServiceConfig implements WebMvcConfigurer  {
+    
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new HandleAuth());
+    }
     
     @Bean
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
@@ -51,23 +59,18 @@ public class WebServiceConfig {
     }
     
     @Bean
-    public GetUserService getUserController(){
+    public GetUserService getUserService(){
         return new GetUserService();
     }
     
     @Bean
-    public IUserRepository getAuthService(){
-        return new UserRepository();
+    public IUserRepository getUserRepository(){
+        return new UserRepository("localhost", 3000);
     }
     
     @Bean
-    public IFileRepository getFileService(){
-        return new FileRepository();
-    }
-    
-    @Bean
-    public IFileRepository getMetadatService(){
-        return new FileRepository();
+    public IFileRepository getFileRepository(){
+        return new FileRepository("localhost", 5010);
     }
     
     @Bean
