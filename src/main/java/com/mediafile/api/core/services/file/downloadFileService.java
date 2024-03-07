@@ -21,7 +21,9 @@ public class downloadFileService {
     @Autowired
     private IFileRepository fileService;
     
-    public String downloadFile() {
+    public byte downloadFile(String ID) {
+        
+        fileService.getFile(ID);
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
