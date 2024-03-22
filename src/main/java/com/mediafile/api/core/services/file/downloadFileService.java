@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.grpc.IFileRepository;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import java.util.Base64;
+import com.mediafile.classes.generated.soap.DownloadFiles;
+import com.google.protobuf.ByteString;
+
 
 /**
  *
@@ -17,12 +21,16 @@ import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 public class downloadFileService {
     
     @Autowired
-    private IFileRepository metadataService;
+    private IFileDataRepository fileDataRepository ;
     @Autowired
-    private IFileRepository fileService;
-    
-    public String downloadFile() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private IFileRepository fileRepository;
+   
+    public String downloadFile(DownloadFiles request) {
+        String fileId = request.getTarget().getFileId();
+        String fileStringContent = fileRepository.getFile(fileId);
+        ByteString fileContentByteString = ByteString.copyFromUtf8(fileStringContent);
+        byte[] fileContentBytes = fileContentByteString.toByteArray();
+        return Base64.getEncoder().encodeToString(fileContentBytes);
     }
     
 }

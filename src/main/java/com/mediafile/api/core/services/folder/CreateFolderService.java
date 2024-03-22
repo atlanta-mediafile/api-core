@@ -6,8 +6,12 @@ package com.mediafile.api.core.services.folder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.mediafile.api.core.repositories.grpc.IFileRepository;
-import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
+import com.mediafile.classes.generated.rest.Folder;
+import com.mediafile.classes.generated.rest.Response;
+import com.mediafile.classes.generated.soap.CreateFolder;
+import java.time.Instant;
+import java.util.UUID;
 
 /**
  *
@@ -17,12 +21,21 @@ import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 public class CreateFolderService {
     
     @Autowired
-    private IFileRepository metadataService;
-    @Autowired
-    private IFileRepository fileService;
+    private IFolderDataRepository folderRepository;
     
-    public boolean createFolder() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Response createFolder(CreateFolder request) {
+        
+        UUID folderId = UUID.randomUUID();
+        Instant timestamp = Instant.now();
+
+        Folder folder = new Folder();
+        folder.setId(folderId.toString());
+        folder.setName(request.getName());
+        folder.setParentId(request.getFolderId());
+        folder.setCreatedDate((int)timestamp.getEpochSecond());
+        folder.setStatus(true);
+        
+        return this.folderRepository.createFolder(request.getTarget().getUserId(), folder);
     }
     
 }

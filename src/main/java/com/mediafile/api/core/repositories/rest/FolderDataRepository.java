@@ -4,10 +4,13 @@
  */
 package com.mediafile.api.core.repositories.rest;
 
+import com.google.gson.reflect.TypeToken;
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Folder;
 import com.mediafile.classes.generated.rest.FolderResponse;
 import com.mediafile.classes.generated.rest.Response;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  *
@@ -15,6 +18,8 @@ import com.mediafile.classes.generated.rest.Response;
  */
 public class FolderDataRepository implements IFolderDataRepository {
 
+    private static final String BASE_URL = "http://localhost:3000";
+    
     @Override
     public Response<FolderResponse> getFolder(String userId, String folderId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -41,8 +46,14 @@ public class FolderDataRepository implements IFolderDataRepository {
     }
 
     @Override
-    public Response<String> createFolder(String userId, Folder folder) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Response<Folder> createFolder(String userId, Folder folder) {
+        try {
+            String url = String.format("%s/user/%s/folder", BASE_URL, userId);
+            Response<Folder> res = (Response<Folder>)Request.Post(url, folder, new TypeToken<Response<Folder>>(){}.getType());
+            return res;
+        } catch (URISyntaxException | IOException | InterruptedException ex) {
+            return new Response<>(new String[]{ex.getMessage()}, false, null);
+        }
     }
     
 }
