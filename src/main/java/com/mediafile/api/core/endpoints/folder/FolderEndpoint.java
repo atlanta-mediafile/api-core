@@ -4,6 +4,11 @@
  */
 package com.mediafile.api.core.endpoints.folder;
 
+import com.mediafile.api.core.services.file.UploadFileService;
+import com.mediafile.api.core.services.folder.CreateFolderService;
+import com.mediafile.api.core.utils.Mapper;
+import com.mediafile.classes.generated.rest.Folder;
+import com.mediafile.classes.generated.rest.Response;
 import com.mediafile.classes.generated.soap.CreateFolder;
 import com.mediafile.classes.generated.soap.CreateFolderResponse;
 import com.mediafile.classes.generated.soap.DeleteFolder;
@@ -15,19 +20,23 @@ import com.mediafile.classes.generated.soap.RenameFolderResponse;
 import com.mediafile.classes.generated.soap.ShareFolder;
 import com.mediafile.classes.generated.soap.ShareFolderResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import com.mediafile.api.core.repositories.rmi.IUserRepository;
-import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 
 /**
  *
  * @author 000430063
  */
+@Endpoint
 public class FolderEndpoint implements IFolderEndpoint {
         
     private static final String NAMESPACE_URI = "http://www.generated.classes.mediafile.com/soap";
+    
+    @Autowired
+    private CreateFolderService createFolder;
+    
     
     @Override
     @ResponsePayload
@@ -54,7 +63,17 @@ public class FolderEndpoint implements IFolderEndpoint {
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "CreateFolder")
     public CreateFolderResponse createFolder(@RequestPayload CreateFolder request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Response<Folder> res = createFolder.createFolder(request);
+        
+        CreateFolderResponse response = new CreateFolderResponse();
+        response.setSuccess(res.isSuccess());
+        response.setErrors(Mapper.getErrors(res.getErrors()));
+        
+        if(res.isSuccess()) {
+            response.setData(res.getData().getId());
+        }
+        
+        return response;
     }
 
     @Override
