@@ -25,7 +25,7 @@ public interface IFileDataRepository {
      *  Share file
      * @param userId id of the user file
      * @param fileId file id
-     * @param users users id for share files
+     * @param users
      * @return
      */
     public Response<String> shareFile(String userId, String fileId, String[] users);

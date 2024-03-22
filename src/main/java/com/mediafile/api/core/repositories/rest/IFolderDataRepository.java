@@ -63,6 +63,6 @@ public interface IFolderDataRepository {
      * @param folder new folder
      * @return
      */
-    public Response<String> createFolder(String userId, Folder folder);
+    public Response<Folder> createFolder(String userId, Folder folder);
     
 }
