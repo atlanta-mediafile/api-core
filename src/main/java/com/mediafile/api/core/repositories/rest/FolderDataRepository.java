@@ -18,7 +18,7 @@ import java.net.URISyntaxException;
  */
 public class FolderDataRepository implements IFolderDataRepository {
 
-    private static final String BASE_URL = "http://localhost:3000";
+    private static final String BASE_URL = "http://localhost:3001";
     
     @Override
     public Response<FolderResponse> getFolder(String userId, String folderId) {
