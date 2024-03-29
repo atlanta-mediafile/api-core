@@ -72,7 +72,7 @@
         <dependency>
             <groupId>com.github.atlanta-mediafile</groupId>
             <artifactId>rmi-interfaces</artifactId>
-            <version>0.1.3</version>
+            <version>c9a4854</version>
         </dependency>
         
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
