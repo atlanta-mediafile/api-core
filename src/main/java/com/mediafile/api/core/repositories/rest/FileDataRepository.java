@@ -9,7 +9,6 @@ import com.mediafile.classes.generated.rest.Response;
 import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import org.springframework.stereotype.Component;
 
 /**
  *
@@ -17,8 +16,12 @@ import org.springframework.stereotype.Component;
  */
 public class FileDataRepository implements IFileDataRepository {
     
-  private static final String BASE_URL = "http://localhost:3000"; 
+    private final String BASE_URL; 
 
+    public FileDataRepository(String url){
+        this.BASE_URL = url;
+    }
+    
     @Override
     public Response<File> getFile(String userId, String fileId) {
         String url = BASE_URL + "/user/" + userId + "/file/" + fileId;

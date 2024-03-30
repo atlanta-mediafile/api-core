@@ -65,22 +65,46 @@ public class WebServiceConfig extends WsConfigurerAdapter  {
     
     @Bean
     public IUserRepository getUserRepository(){
-        return new UserRepository("localhost", 3000);
+        String host = System.getenv("SRV_AUTH_HOST");
+        String port = System.getenv("SRV_AUTH_PORT");
+        if(host == null){
+            host = "localhost";
+        }
+        if(port == null){
+            port = "3000";
+        }
+        return new UserRepository(host, Integer.parseInt(port));
     }
     
     @Bean
     public IFileRepository getFileRepository(){
-        return new FileRepository("localhost", 5010);
+        String host = System.getenv("SRV_FILE_HOST");
+        String port = System.getenv("SRV_FILE_PORT");
+        if(host == null){
+            host = "localhost";
+        }
+        if(port == null){
+            port = "3002";
+        }
+        return new FileRepository(host, Integer.parseInt(port));
     }
     
     @Bean
     public IFileDataRepository getFileDataRepository(){
-        return new FileDataRepository();
+        String host = System.getenv("SRV_DB_URL");
+        if(host == null){
+            host = "http://localhost:3003";
+        }
+        return new FileDataRepository(host);
     }
     
     @Bean
     public IFolderDataRepository getFolderDataRepository(){
-        return new FolderDataRepository();
+        String host = System.getenv("SRV_DB_URL");
+        if(host == null){
+            host = "http://localhost:3003";
+        }
+        return new FolderDataRepository(host);
     }
     
     @Bean
