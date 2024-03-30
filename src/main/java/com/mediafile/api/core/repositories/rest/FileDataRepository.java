@@ -6,6 +6,7 @@ package com.mediafile.api.core.repositories.rest;
 
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
+import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import org.springframework.stereotype.Component;
@@ -15,12 +16,16 @@ import org.springframework.stereotype.Component;
  * @author 000430063
  */
 public class FileDataRepository implements IFileDataRepository {
-  
+    
+  private static final String BASE_URL = "http://localhost:3000"; 
+
     @Override
     public Response<File> getFile(String userId, String fileId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String url = BASE_URL + "/user/" + userId + "/file/" + fileId;
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(url, Response.class);
     }
-
+    
     @Override
     public Response<String> shareFile(String userId, String fileId, String[] users) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

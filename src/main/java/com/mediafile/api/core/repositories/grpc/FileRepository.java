@@ -66,6 +66,8 @@ public class FileRepository implements IFileRepository {
         var  response = stub.getSingleFile(request);
         return Base64.getEncoder().encodeToString(response.getFile().toByteArray());
     }
+     
+     
 
     @Override
     public String uploadFileAsync(String b64File) {

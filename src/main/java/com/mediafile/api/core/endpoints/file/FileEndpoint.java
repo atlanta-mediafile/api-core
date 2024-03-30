@@ -25,6 +25,10 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import com.mediafile.api.core.services.file.UploadFileService;
 import com.mediafile.api.core.utils.Mapper;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
+import com.mediafile.api.core.services.file.downloadFileService;
+import com.mediafile.classes.generated.soap.File;
+import com.mediafile.classes.generated.soap.Files;
+
 
 /**
  *
@@ -37,6 +41,9 @@ public class FileEndpoint implements IFileEndpoint {
     
     @Autowired
     private UploadFileService uploadFile;
+    
+    @Autowired
+    private downloadFileService downloadFile;
     
     @Override
     @ResponsePayload
@@ -89,11 +96,28 @@ public class FileEndpoint implements IFileEndpoint {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DownloadFiles")
-    public DownloadFilesResponse downloadFile(@RequestPayload DownloadFiles request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+@Override
+@ResponsePayload
+@PayloadRoot(namespace = NAMESPACE_URI, localPart = "DownloadFiles")
+public DownloadFilesResponse downloadFile(@RequestPayload DownloadFiles request) {
+     File file = downloadFile.downloadFile(request);
+    
+    
+    
+    DownloadFilesResponse response = new DownloadFilesResponse();
+    
+    response.setData(file);
+    response.setSuccess(true);
+    
+    return response;
+    
+}
+
+
+
+
+
+
+
     
 }

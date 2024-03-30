@@ -106,16 +106,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     <xs:element name="DownloadFiles">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="target" type="tns:Identifiers"/>
-                <xs:element name="folderId" maxOccurs="unbounded">
-                    <xs:complexType>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:string">
-                        <xs:attribute name="type" type="tns:FileType"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-                    </xs:complexType>
-                </xs:element>
+                <xs:element name="target" type="tns:Identifiers"/>               
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -287,7 +278,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
             <xs:sequence>
                 <xs:element name="errors"   type="tns:Errors"/>
                 <xs:element name="success"  type="xs:boolean"/>
-                <xs:element name="data"     type="tns:Files"/>
+                <xs:element name="data"     type="tns:File"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -374,7 +365,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
             <xs:element name="MimeType"     type="xs:string"/>
             <xs:element name="Size"         type="xs:integer"/>
             <xs:element name="FolderId"     type="xs:string"/>
-            <xs:element name="CreatedDate"  type="xs:date"/>
+            <xs:element name="CreatedDate"  type="xs:integer"/>
             <xs:element name="Content"      type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
