@@ -23,7 +23,9 @@ import com.mediafile.api.core.repositories.rest.FolderDataRepository;
 import com.mediafile.api.core.repositories.rmi.IUserRepository;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import java.util.List;
+import org.springframework.ws.config.annotation.WsConfigurerAdapter;
+import org.springframework.ws.server.EndpointInterceptor;
 
 /**
  *
@@ -31,7 +33,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @EnableWs
 @Configuration
-public class WebServiceConfig implements WebMvcConfigurer  {
+public class WebServiceConfig extends WsConfigurerAdapter  {
+
+    @Override
+    public void addInterceptors(List<EndpointInterceptor> interceptors) {
+        interceptors.add(new AuthInterceptor());
+    }
     
     @Bean
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
