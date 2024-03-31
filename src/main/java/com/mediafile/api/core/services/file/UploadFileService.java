@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.grpc.IFileRepository;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import com.mediafile.api.core.utils.Mapper;
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
 import com.mediafile.classes.generated.soap.UploadFile;
+import com.mediafile.classes.generated.soap.UploadFileResponse;
 import java.util.Base64;
+import java.util.Date;
 
 /**
  *
@@ -25,14 +28,18 @@ public class UploadFileService {
     @Autowired
     private IFileRepository fileRepo;
     
-    public boolean uploadFile(UploadFile uploadFile) {
+    public UploadFileResponse uploadFile(UploadFile uploadFile) {
+        
+        UploadFileResponse response = new UploadFileResponse();
         
         byte[] bytes = Base64.getDecoder().decode(uploadFile.getContent());
         
         String id = fileRepo.uploadFile(bytes);
         
         if(id == null){
-            return false;
+            response.setSuccess(false);
+            response.setErrors(Mapper.getErrors("Failed to upload file, try later"));
+            return response;
         }
         
         int size = bytes.length;
@@ -40,14 +47,27 @@ public class UploadFileService {
         File newFile = new File();
         
         newFile.setId(id);
+        newFile.setId(id);
         newFile.setName(uploadFile.getName());
         newFile.setExtension(uploadFile.getExtension());
-        newFile.setSize(size);
+        newFile.setMimeType("application/xlsx");
         newFile.setFolderId(uploadFile.getFolderId());
+        newFile.setSize(size);
+        newFile.setCreatedDate(new Date());
+        newFile.setStatus(true);
         
-        Response<String> res = fileDataRepo.saveMetadata(id, newFile);
+        Response<File> res = fileDataRepo.saveMetadata(id, newFile);
         
-        return res.isSuccess();
+        if(!res.isSuccess()){
+            response.setSuccess(false);
+            response.setErrors(Mapper.getErrors(res.getErrors()));
+            return response;
+        }
+        
+        response.setSuccess(true);
+        response.setData(res.getData().getId());
+        
+        return response;
     }
     
 }

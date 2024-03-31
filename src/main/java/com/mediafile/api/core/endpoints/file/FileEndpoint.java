@@ -27,7 +27,6 @@ import com.mediafile.api.core.utils.Mapper;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import com.mediafile.api.core.services.file.downloadFileService;
 import com.mediafile.classes.generated.soap.File;
-import com.mediafile.classes.generated.soap.Files;
 
 
 /**
@@ -63,16 +62,13 @@ public class FileEndpoint implements IFileEndpoint {
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "UploadFile")
     public UploadFileResponse uploadFile(@RequestPayload UploadFile request) {
-        boolean res = uploadFile.uploadFile(request);
-        
-        UploadFileResponse response = new UploadFileResponse();
-        response.setSuccess(res);
-        
-        if(!res) {
-            response.setErrors(Mapper.getErrors("No se pudo crear el archivo"));
+        try{
+            return uploadFile.uploadFile(request);
+        }catch(Exception ex){
+            UploadFileResponse res = new UploadFileResponse();
+            res.setErrors(Mapper.getErrors("Server error"));
+            return res;
         }
-        
-        return response;
     }
 
     @Override
