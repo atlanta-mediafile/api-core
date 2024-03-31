@@ -62,5 +62,5 @@ public interface IFileDataRepository {
      * @param newFile file to save
      * @return
      */
-    public Response<String> saveMetadata(String userId, File newFile);
+    public Response<File> saveMetadata(String userId, File newFile);
 }
