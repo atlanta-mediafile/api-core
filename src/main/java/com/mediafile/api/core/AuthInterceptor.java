@@ -11,7 +11,6 @@ import javax.xml.namespace.QName;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.ws.context.MessageContext;
 import org.springframework.ws.server.EndpointInterceptor;
 import org.springframework.ws.soap.SoapBody;
@@ -23,7 +22,6 @@ import org.springframework.ws.soap.SoapMessage;
  *
  * @author Dego
  */
-@Component
 public class AuthInterceptor implements EndpointInterceptor {
 
     private static final String NAMESPACE_URI = "http://www.generated.classes.mediafile.com/soap";

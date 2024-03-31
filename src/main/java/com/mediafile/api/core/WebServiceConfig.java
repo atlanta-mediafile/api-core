@@ -35,9 +35,14 @@ import org.springframework.ws.server.EndpointInterceptor;
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter  {
 
+    @Bean
+    public AuthInterceptor authInterceptor() {
+        return new AuthInterceptor();
+    }
+    
     @Override
     public void addInterceptors(List<EndpointInterceptor> interceptors) {
-        interceptors.add(new AuthInterceptor());
+        interceptors.add(authInterceptor());
     }
     
     @Bean
