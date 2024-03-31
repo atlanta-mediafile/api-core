@@ -4,7 +4,9 @@
  */
 package com.mediafile.classes.generated.rest;
 
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -15,10 +17,20 @@ public class File implements Serializable {
     private String id;
     private String name;
     private String extension;
+    @SerializedName("mime_type")
     private String mimeType;
     private int size;
+    @SerializedName("folder_id")
     private String folderId;
-    private int timeStamp;
+    @SerializedName("created_date")
+    private Date createdDate;
+    private boolean status;
+    @SerializedName("user_id")
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
 
     public String getId() {
         return id;
@@ -44,8 +56,12 @@ public class File implements Serializable {
         return folderId;
     }
 
-    public int getTimeStamp() {
-        return timeStamp;
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public boolean isStatus() {
+        return status;
     }
 
     public void setId(String id) {
@@ -72,8 +88,17 @@ public class File implements Serializable {
         this.folderId = folderId;
     }
 
-    public void setTimeStamp(int timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "File{" + "id=" + id + ", name=" + name + ", extension=" + extension + ", mimeType=" + mimeType + ", size=" + size + ", folderId=" + folderId + ", timeStamp=" + createdDate + '}';
     }
     
 }

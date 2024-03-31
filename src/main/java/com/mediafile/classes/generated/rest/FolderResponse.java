@@ -5,6 +5,7 @@
 package com.mediafile.classes.generated.rest;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  *
@@ -28,6 +29,9 @@ public class FolderResponse implements Serializable {
         return folders;
     }
 
-    
+    @Override
+    public String toString() {
+        return "FolderResponse{" + "folder=" + folder + ", files=" + Arrays.toString(files) + ", folders=" + Arrays.toString(folders) + '}';
+    }
     
 }

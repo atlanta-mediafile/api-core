@@ -4,6 +4,9 @@
  */
 package com.mediafile.classes.generated.rest;
 
+import com.google.gson.annotations.SerializedName;
+import java.util.Date;
+
 /**
  *
  * @author 000430063
@@ -13,8 +16,16 @@ public class Folder {
     private String id;
     private String name;
     private boolean status;
+    @SerializedName("parent_id")
     private String parentId;
-    private long createdDate;
+    @SerializedName("created_date")
+    private Date createdDate;
+    @SerializedName("user_id")
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
     
     public String getId() {
         return id;
@@ -28,11 +39,11 @@ public class Folder {
         return parentId;
     }
 
-    public long getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(int createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -43,8 +54,6 @@ public class Folder {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    
     
     public void setId(String id) {
         this.id = id;
