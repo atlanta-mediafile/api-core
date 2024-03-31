@@ -37,7 +37,7 @@ public class downloadFileService {
             Response<com.mediafile.classes.generated.rest.File> restFile = fileDataRepository.getFile(request.getTarget().getUserId(), fileId);
             File file = new File(); 
             file.setContent(archivo);
-            file.setCreatedDate(BigInteger.valueOf(restFile.getData().getTimeStamp()));
+            file.setCreatedDate(BigInteger.valueOf(restFile.getData().getCreatedDate().getTime()));
             file.setExtension(restFile.getData().getExtension());
             file.setFolderId(restFile.getData().getFolderId());
             file.setId(fileId);
