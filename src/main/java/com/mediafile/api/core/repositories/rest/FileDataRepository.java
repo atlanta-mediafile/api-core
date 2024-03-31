@@ -4,10 +4,12 @@
  */
 package com.mediafile.api.core.repositories.rest;
 
+import com.google.gson.reflect.TypeToken;
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
 import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 
 /**
@@ -50,12 +52,18 @@ public class FileDataRepository implements IFileDataRepository {
     }
 
     @Override
-    public Response<String> saveMetadata(String userId, File newFile) {
+    public Response<File> saveMetadata(String userId, File newFile) {
+        String url = BASE_URL + "/user/" + userId + "/file";
+        Response<File> res;
+        
+        Type type = new TypeToken<Response<File>>() { }.getType();
         try {
-            return (Response<String>) Request.Post("http://localhost:3001/file", this, Response.class);
+            res = (Response<File>) Request.Post(url, newFile, type);
         } catch (URISyntaxException | IOException | InterruptedException ex) {
-        return new Response<>(new String[0], false, null);
+            res = new Response(new String[]{"Server error"});
         }
+        
+        return res;
     }
     
 }
