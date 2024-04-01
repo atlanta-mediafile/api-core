@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.grpc.IFileRepository;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import com.mediafile.api.core.utils.Base64Utils;
 import com.mediafile.api.core.utils.Mapper;
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
 import com.mediafile.classes.generated.soap.UploadFile;
 import com.mediafile.classes.generated.soap.UploadFileResponse;
-import java.util.Base64;
 import java.util.Date;
 
 /**
@@ -28,12 +28,11 @@ public class UploadFileService {
     @Autowired
     private IFileRepository fileRepo;
     
-    public UploadFileResponse uploadFile(UploadFile uploadFile) {
+    public UploadFileResponse uploadFile(UploadFile uploadFile) throws Exception {
         
         UploadFileResponse response = new UploadFileResponse();
         
-        byte[] bytes = Base64.getDecoder().decode(uploadFile.getContent());
-        
+        byte[] bytes = Base64Utils.toBytes(uploadFile.getContent());
         String id = fileRepo.uploadFile(bytes);
         
         if(id == null){
@@ -41,16 +40,16 @@ public class UploadFileService {
             response.setErrors(Mapper.getErrors("Failed to upload file, try later"));
             return response;
         }
-        
         int size = bytes.length;
+        String mimeType = Base64Utils.getMimeType(uploadFile.getContent());
+        bytes = null;
         
         File newFile = new File();
         
         newFile.setId(id);
-        newFile.setId(id);
         newFile.setName(uploadFile.getName());
         newFile.setExtension(uploadFile.getExtension());
-        newFile.setMimeType("application/xlsx");
+        newFile.setMimeType(mimeType);
         newFile.setFolderId(uploadFile.getFolderId());
         newFile.setSize(size);
         newFile.setCreatedDate(new Date());
