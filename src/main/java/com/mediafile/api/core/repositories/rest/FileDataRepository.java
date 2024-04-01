@@ -28,8 +28,16 @@ public class FileDataRepository implements IFileDataRepository {
     @Override
     public Response<File> getFile(String userId, String fileId) {
         String url = BASE_URL + "/user/" + userId + "/file/" + fileId;
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(url, Response.class);
+        Response<File> res;
+        
+        Type type = new TypeToken<Response<File>>() { }.getType();
+        try {
+            res = (Response<File>) Request.Get(url , type);
+        } catch (URISyntaxException | IOException | InterruptedException ex) {
+            res = new Response(new String[]{"Server error"});
+        }
+        
+        return res;
     }
     
     @Override
