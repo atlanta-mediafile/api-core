@@ -50,11 +50,12 @@ public interface IFileDataRepository {
     /**
      *  Edit file
      * @param userId id of the user file
+     * @param folderId
      * @param name file name
      * @param extension file extension
      * @return
      */
-    public Response<File> editMetadata(String userId, String name, String extension);
+    public Response<File> editMetadata(String userId,String folderId, String name, String extension);
     
     /**
      *  Save file

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 
+
 /**
  *
  * @author 000430063
@@ -47,9 +48,25 @@ public class FileDataRepository implements IFileDataRepository {
     }
 
     @Override
-    public Response<File> editMetadata(String userId, String name, String extension) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Response<File> editMetadata(String userId, String fileId, String name, String extension) {
+       String url = BASE_URL + "/user/" + userId + "/file/" +fileId;
+        System.out.println(url);
+        Response<File> res;
+        
+        Type type = new TypeToken<Response<File>>() { }.getType();
+        try {
+            File file = new File();
+            file.setId(fileId);
+            file.setName(name);
+            file.setExtension(extension);
+            res = (Response<File>) Request.Put(url, file, type);
+        } catch (URISyntaxException | IOException | InterruptedException ex) {
+            res = new Response(new String[]{"Server error"});
+        }
+        
+        return res;
     }
+   
 
     @Override
     public Response<File> saveMetadata(String userId, File newFile) {

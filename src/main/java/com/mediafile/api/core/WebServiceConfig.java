@@ -89,7 +89,7 @@ public class WebServiceConfig extends WsConfigurerAdapter  {
             host = "localhost";
         }
         if(port == null){
-            port = "3002";
+            port = "5010";
         }
         return new FileRepository(host, Integer.parseInt(port));
     }
@@ -98,7 +98,7 @@ public class WebServiceConfig extends WsConfigurerAdapter  {
     public IFileDataRepository getFileDataRepository(){
         String host = System.getenv("SRV_DB_URL");
         if(host == null){
-            host = "http://localhost:3003";
+            host = "http://localhost:3000";
         }
         return new FileDataRepository(host);
     }
@@ -107,7 +107,7 @@ public class WebServiceConfig extends WsConfigurerAdapter  {
     public IFolderDataRepository getFolderDataRepository(){
         String host = System.getenv("SRV_DB_URL");
         if(host == null){
-            host = "http://localhost:3003";
+            host = "http://localhost:3000";
         }
         return new FolderDataRepository(host);
     }

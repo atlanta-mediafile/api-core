@@ -54,7 +54,7 @@ public class Request {
             .build();
         
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        
+        System.out.println(response.body());
         var res = gson.fromJson(response.body(), typeOfT);
         return res;
     }

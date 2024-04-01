@@ -10,6 +10,7 @@ import com.mediafile.classes.generated.soap.DownloadFiles;
 import com.mediafile.classes.generated.soap.DownloadFilesResponse;
 import com.mediafile.classes.generated.soap.EditFile;
 import com.mediafile.classes.generated.soap.EditFileResponse;
+import com.mediafile.api.core.services.file.EditFileService;
 import com.mediafile.classes.generated.soap.GetFiles;
 import com.mediafile.classes.generated.soap.GetFilesResponse;
 import com.mediafile.classes.generated.soap.MoveFile;
@@ -43,6 +44,9 @@ public class FileEndpoint implements IFileEndpoint {
     
     @Autowired
     private downloadFileService downloadFile;
+    
+    @Autowired
+    private EditFileService editFileService;
     
     @Override
     @ResponsePayload
@@ -89,25 +93,31 @@ public class FileEndpoint implements IFileEndpoint {
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "EditFile")
     public EditFileResponse editFile(@RequestPayload EditFile request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return editFileService.editFile(request);
+        }catch(Exception ex){
+            EditFileResponse res = new EditFileResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
-@Override
-@ResponsePayload
-@PayloadRoot(namespace = NAMESPACE_URI, localPart = "DownloadFiles")
-public DownloadFilesResponse downloadFile(@RequestPayload DownloadFiles request) {
-     File file = downloadFile.downloadFile(request);
-    
-    
-    
-    DownloadFilesResponse response = new DownloadFilesResponse();
-    
-    response.setData(file);
-    response.setSuccess(true);
-    
-    return response;
-    
-}
+    @Override
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DownloadFiles")
+    public DownloadFilesResponse downloadFile(@RequestPayload DownloadFiles request) {
+         File file = downloadFile.downloadFile(request);
+
+
+
+        DownloadFilesResponse response = new DownloadFilesResponse();
+
+        response.setData(file);
+        response.setSuccess(true);
+
+        return response;
+
+    }
 
 
 

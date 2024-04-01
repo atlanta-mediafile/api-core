@@ -55,7 +55,7 @@ public class UploadFileService {
         newFile.setCreatedDate(new Date());
         newFile.setStatus(true);
         
-        Response<File> res = fileDataRepo.saveMetadata(id, newFile);
+        Response<File> res = fileDataRepo.saveMetadata(uploadFile.getTarget().getUserId(), newFile);
         
         if(!res.isSuccess()){
             response.setSuccess(false);
