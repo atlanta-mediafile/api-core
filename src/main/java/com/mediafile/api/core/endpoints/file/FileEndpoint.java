@@ -66,7 +66,7 @@ public class FileEndpoint implements IFileEndpoint {
             return uploadFile.uploadFile(request);
         }catch(Exception ex){
             UploadFileResponse res = new UploadFileResponse();
-            res.setErrors(Mapper.getErrors("Server error"));
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
             return res;
         }
     }
