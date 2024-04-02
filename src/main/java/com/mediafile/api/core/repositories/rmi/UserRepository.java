@@ -13,8 +13,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import org.springframework.stereotype.Component;
-
 
 /**
  *
@@ -36,14 +34,16 @@ public class UserRepository extends Thread implements IUserRepository {
         try{
             Registry registry = LocateRegistry.getRegistry(this.host, this.port);
             this.auhtProvider = (IAuthProvider) registry.lookup("AuthProvider");
+            System.out.println("[server] rmi server connected");
         }catch(NotBoundException | RemoteException e) {
-            System.out.println("[rmi] error: " + e);
+            System.out.println("[server] error: " + e);
         }
     }
 
     @Override
     public Response<Boolean> Auth(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new Response(true);
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override

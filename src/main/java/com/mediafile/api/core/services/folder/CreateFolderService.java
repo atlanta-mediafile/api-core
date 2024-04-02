@@ -11,7 +11,9 @@ import com.mediafile.classes.generated.rest.Folder;
 import com.mediafile.classes.generated.rest.Response;
 import com.mediafile.classes.generated.soap.CreateFolder;
 import java.time.Instant;
+import java.util.Date;
 import java.util.UUID;
+
 
 /**
  *
@@ -32,7 +34,7 @@ public class CreateFolderService {
         folder.setId(folderId.toString());
         folder.setName(request.getName());
         folder.setParentId(request.getFolderId());
-        folder.setCreatedDate((int)timestamp.getEpochSecond());
+        folder.setCreatedDate(new Date());
         folder.setStatus(true);
         
         return this.folderRepository.createFolder(request.getTarget().getUserId(), folder);

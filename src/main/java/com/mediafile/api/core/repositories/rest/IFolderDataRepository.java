@@ -4,6 +4,7 @@
  */
 package com.mediafile.api.core.repositories.rest;
 
+import com.mediafile.classes.generated.rest.DeleteFolderReponse;
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Folder;
 import com.mediafile.classes.generated.rest.FolderResponse;
@@ -38,7 +39,7 @@ public interface IFolderDataRepository {
      * @param folderId folder id
      * @return
      */
-    public Response<File> deleteFolder(String userId, String folderId);
+    public Response<DeleteFolderReponse> deleteFolder(String userId, String folderId);
     
     /**
      *  Move folder
@@ -52,10 +53,10 @@ public interface IFolderDataRepository {
     /**
      *  Edit folder name
      * @param userId user id
-     * @param newName new folder name
+     * @param folder
      * @return
      */
-    public Response<File> editName(String userId, String newName);
+    public Response<Folder> editName(String userId, Folder folder);
     
     /**
      *  Create folder

@@ -4,12 +4,15 @@
  */
 package com.mediafile.api.core.repositories.rest;
 
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.mediafile.classes.generated.rest.DeleteFolderReponse;
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Folder;
 import com.mediafile.classes.generated.rest.FolderResponse;
 import com.mediafile.classes.generated.rest.Response;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 
 /**
@@ -18,11 +21,27 @@ import java.net.URISyntaxException;
  */
 public class FolderDataRepository implements IFolderDataRepository {
 
-    private static final String BASE_URL = "http://localhost:3000";
+     private final String BASE_URL; 
+
+    public FolderDataRepository(String url){
+        this.BASE_URL = url;
+    }
     
     @Override
     public Response<FolderResponse> getFolder(String userId, String folderId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        String url = BASE_URL + "/user/" + userId + "/folder/" + folderId;
+        System.out.println(url);
+        Response<FolderResponse> res;
+        
+        Type type = new TypeToken<Response<FolderResponse>>() { }.getType();
+        try {
+            res = (Response<FolderResponse>) Request.Get(url, type);
+        } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
+            res = new Response(new String[]{"Server error", ex.getMessage()});
+        }
+        
+        return res;
     }
 
     @Override
@@ -31,8 +50,20 @@ public class FolderDataRepository implements IFolderDataRepository {
     }
 
     @Override
-    public Response<File> deleteFolder(String userId, String folderId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Response<DeleteFolderReponse> deleteFolder(String userId, String folderId) {
+        
+        String url = BASE_URL + "/user/" + userId + "/folder/" + folderId;
+        System.out.println(url);
+        Response<DeleteFolderReponse> res;
+        
+        Type type = new TypeToken<Response<DeleteFolderReponse>>() { }.getType();
+        try {
+            res = (Response<DeleteFolderReponse>) Request.Delete(url, type);
+        } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
+            res = new Response(new String[]{"Server error"});
+        }
+          
+        return res;
     }
 
     @Override
@@ -41,19 +72,35 @@ public class FolderDataRepository implements IFolderDataRepository {
     }
 
     @Override
-    public Response<File> editName(String userId, String newName) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Response<Folder> editName(String userId, Folder folder) {
+        
+        String url = BASE_URL + "/user/" + userId + "/folder/" + folder.getId();
+        System.out.println(url);
+        Response<Folder> res;
+        
+        Type type = new TypeToken<Response<Folder>>() { }.getType();
+        try {
+            res = (Response<Folder>) Request.Put(url, folder, type);
+        } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
+            res = new Response(new String[]{"Server error"});
+        }
+        
+        return res;
     }
 
     @Override
     public Response<Folder> createFolder(String userId, Folder folder) {
+        String url = BASE_URL + "/user/" + userId + "/folder";
+        Response<Folder> res;
+        
+        Type type = new TypeToken<Response<Folder>>() { }.getType();
         try {
-            String url = String.format("%s/user/%s/folder", BASE_URL, userId);
-            Response<Folder> res = (Response<Folder>)Request.Post(url, folder, new TypeToken<Response<Folder>>(){}.getType());
-            return res;
-        } catch (URISyntaxException | IOException | InterruptedException ex) {
-            return new Response<>(new String[]{ex.getMessage()}, false, null);
+            res = (Response<Folder>) Request.Post(url, folder, type);
+        } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
+            res = new Response(new String[]{"Server error"});
         }
+        
+        return res;
     }
     
 }

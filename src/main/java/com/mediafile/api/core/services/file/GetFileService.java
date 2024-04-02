@@ -9,6 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.grpc.IFileRepository;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
+import com.mediafile.api.core.utils.Mapper;
+import com.mediafile.classes.generated.rest.File;
+import com.mediafile.classes.generated.rest.Folder;
+import com.mediafile.classes.generated.rest.FolderResponse;
+import com.mediafile.classes.generated.rest.Response;
+import com.mediafile.classes.generated.soap.FileInfo;
+import com.mediafile.classes.generated.soap.FilesInfo;
+import com.mediafile.classes.generated.soap.FolderInfo;
+import com.mediafile.classes.generated.soap.Folders;
+import com.mediafile.classes.generated.soap.GetFiles;
+import java.math.BigInteger;
 
 /**
  *
@@ -18,12 +30,52 @@ import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 public class GetFileService {
     
     @Autowired
-    private IFileRepository metadataService;
-    @Autowired
-    private IFileRepository fileService;
+    private IFolderDataRepository metadataRepository;
     
-    public GetFilesResponse.Data getFile() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public GetFilesResponse getFile(GetFiles request) {
+        GetFilesResponse response = new GetFilesResponse();
+        
+        Response<FolderResponse> res = metadataRepository.getFolder(
+            request.getTarget().getUserId(), 
+            request.getTarget().getFolderId()
+        );
+        
+        if(!res.isSuccess()){
+            response.setSuccess(false);
+            response.setErrors(Mapper.getErrors(res.getErrors()));
+        }
+        
+        GetFilesResponse.Data data = new GetFilesResponse.Data();
+        
+        FilesInfo files = new FilesInfo();
+        
+        for (File file : res.getData().getFiles()) {
+            FileInfo fileRes = new FileInfo();
+            fileRes.setId(file.getId());
+            fileRes.setFolderId(file.getFolderId());
+            fileRes.setName(file.getName());
+            fileRes.setExtension(file.getExtension());
+            fileRes.setCreatedDate(BigInteger.valueOf(file.getCreatedDate().getTime()));
+            fileRes.setSize(BigInteger.valueOf(file.getSize()));
+            files.getFiles().add(fileRes);
+        }
+        
+        Folders folders = new Folders();
+        
+        for (Folder folder : res.getData().getFolders()) {
+            FolderInfo folderRes = new FolderInfo();
+            folderRes.setId(folder.getId());
+            folderRes.setName(folder.getName());
+            folderRes.setFolderId(folder.getParentId());
+        }
+        
+        data.setFiles(files);
+        data.setFolders(folders);
+        
+        response.setSuccess(true);
+        response.setData(data);
+     
+        return response;
     }
     
 }

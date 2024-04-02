@@ -1,28 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mediafile.api.core.services.file;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.grpc.IFileRepository;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import com.mediafile.api.core.utils.Mapper;
+import com.mediafile.classes.generated.rest.File;
+import com.mediafile.classes.generated.rest.Response;
+import com.mediafile.classes.generated.soap.EditFile;
+import com.mediafile.classes.generated.soap.EditFileResponse;
 
-/**
- *
- * @author Dego
- */
 @Component
 public class EditFileService {
     
+ 
     @Autowired
-    private IFileRepository metadataService;
-    @Autowired
-    private IFileRepository fileService;
+    private IFileDataRepository fileService;
     
-    public boolean editFile() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public EditFileResponse editFile(EditFile request) {
+        
+        
+        EditFileResponse response = new EditFileResponse();
+
+        // Obtener los datos de la solicitud
+        String userId = request.getTarget().getUserId();
+        String fileId = request.getTarget().getFileId();
+        String name = request.getName();
+        String extension = request.getExtension();
+
+        Response<File> res = fileService.editMetadata(userId,fileId, name, extension);
+        response.setSuccess(res.isSuccess());
+        if(!res.isSuccess()){
+            response.setSuccess(false);
+            response.setErrors(Mapper.getErrors(res.getErrors()));
+            return response;
+        }
+
+        return response;
+        
+
     }
-    
 }
