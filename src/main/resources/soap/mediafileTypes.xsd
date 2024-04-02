@@ -351,8 +351,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
             <xs:element name="extension"    type="xs:string"/>
             <xs:element name="mimeType"     type="xs:string"/>
             <xs:element name="size"         type="xs:integer"/>
-            <xs:element name="dolderId"     type="xs:string"/>
-            <xs:element name="createdDate"  type="xs:date"/>
+            <xs:element name="folderId"     type="xs:string"/>
+            <xs:element name="createdDate"  type="xs:integer"/>
         </xs:sequence>
     </xs:complexType>
     
