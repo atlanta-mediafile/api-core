@@ -11,6 +11,7 @@ import com.mediafile.classes.generated.soap.DownloadFilesResponse;
 import com.mediafile.classes.generated.soap.EditFile;
 import com.mediafile.classes.generated.soap.EditFileResponse;
 import com.mediafile.api.core.services.file.EditFileService;
+import com.mediafile.api.core.services.file.GetFileService;
 import com.mediafile.classes.generated.soap.GetFiles;
 import com.mediafile.classes.generated.soap.GetFilesResponse;
 import com.mediafile.classes.generated.soap.MoveFile;
@@ -48,11 +49,20 @@ public class FileEndpoint implements IFileEndpoint {
     @Autowired
     private EditFileService editFileService;
     
+    @Autowired
+    private GetFileService getFileService;
+    
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetFiles")
     public GetFilesResponse getFiles(@RequestPayload GetFiles request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return getFileService.getFile(request);
+        }catch(Exception ex){
+            GetFilesResponse res = new GetFilesResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
     @Override

@@ -38,7 +38,7 @@ public class FolderDataRepository implements IFolderDataRepository {
         try {
             res = (Response<FolderResponse>) Request.Get(url, type);
         } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
-            res = new Response(new String[]{"Server error"});
+            res = new Response(new String[]{"Server error", ex.getMessage()});
         }
         
         return res;
