@@ -10,6 +10,8 @@ import com.mediafile.classes.generated.soap.DownloadFiles;
 import com.mediafile.classes.generated.soap.DownloadFilesResponse;
 import com.mediafile.classes.generated.soap.EditFile;
 import com.mediafile.classes.generated.soap.EditFileResponse;
+import com.mediafile.api.core.services.file.EditFileService;
+import com.mediafile.api.core.services.file.GetFileService;
 import com.mediafile.classes.generated.soap.GetFiles;
 import com.mediafile.classes.generated.soap.GetFilesResponse;
 import com.mediafile.classes.generated.soap.MoveFile;
@@ -25,6 +27,9 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import com.mediafile.api.core.services.file.UploadFileService;
 import com.mediafile.api.core.utils.Mapper;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
+import com.mediafile.api.core.services.file.downloadFileService;
+import com.mediafile.classes.generated.soap.File;
+
 
 /**
  *
@@ -38,11 +43,26 @@ public class FileEndpoint implements IFileEndpoint {
     @Autowired
     private UploadFileService uploadFile;
     
+    @Autowired
+    private downloadFileService downloadFile;
+    
+    @Autowired
+    private EditFileService editFileService;
+    
+    @Autowired
+    private GetFileService getFileService;
+    
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetFiles")
     public GetFilesResponse getFiles(@RequestPayload GetFiles request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return getFileService.getFile(request);
+        }catch(Exception ex){
+            GetFilesResponse res = new GetFilesResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
     @Override
@@ -56,16 +76,13 @@ public class FileEndpoint implements IFileEndpoint {
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "UploadFile")
     public UploadFileResponse uploadFile(@RequestPayload UploadFile request) {
-        boolean res = uploadFile.uploadFile(request);
-        
-        UploadFileResponse response = new UploadFileResponse();
-        response.setSuccess(res);
-        
-        if(!res) {
-            response.setErrors(Mapper.getErrors("No se pudo crear el archivo"));
+        try{
+            return uploadFile.uploadFile(request);
+        }catch(Exception ex){
+            UploadFileResponse res = new UploadFileResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
         }
-        
-        return response;
     }
 
     @Override
@@ -86,14 +103,37 @@ public class FileEndpoint implements IFileEndpoint {
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "EditFile")
     public EditFileResponse editFile(@RequestPayload EditFile request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return editFileService.editFile(request);
+        }catch(Exception ex){
+            EditFileResponse res = new EditFileResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DownloadFiles")
     public DownloadFilesResponse downloadFile(@RequestPayload DownloadFiles request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         File file = downloadFile.downloadFile(request);
+
+
+
+        DownloadFilesResponse response = new DownloadFilesResponse();
+
+        response.setData(file);
+        response.setSuccess(true);
+
+        return response;
+
     }
+
+
+
+
+
+
+
     
 }

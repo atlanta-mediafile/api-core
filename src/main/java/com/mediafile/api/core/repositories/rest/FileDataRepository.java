@@ -4,23 +4,42 @@
  */
 package com.mediafile.api.core.repositories.rest;
 
+import com.google.gson.reflect.TypeToken;
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
+import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URISyntaxException;
-import org.springframework.stereotype.Component;
+
 
 /**
  *
  * @author 000430063
  */
 public class FileDataRepository implements IFileDataRepository {
-  
+    
+    private final String BASE_URL; 
+
+    public FileDataRepository(String url){
+        this.BASE_URL = url;
+    }
+    
     @Override
     public Response<File> getFile(String userId, String fileId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String url = BASE_URL + "/user/" + userId + "/file/" + fileId;
+        Response<File> res;
+        
+        Type type = new TypeToken<Response<File>>() { }.getType();
+        try {
+            res = (Response<File>) Request.Get(url , type);
+        } catch (URISyntaxException | IOException | InterruptedException ex) {
+            res = new Response(new String[]{"Server error"});
+        }
+        
+        return res;
     }
-
+    
     @Override
     public Response<String> shareFile(String userId, String fileId, String[] users) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -37,17 +56,39 @@ public class FileDataRepository implements IFileDataRepository {
     }
 
     @Override
-    public Response<File> editMetadata(String userId, String name, String extension) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Response<File> editMetadata(String userId, String fileId, String name, String extension) {
+       String url = BASE_URL + "/user/" + userId + "/file/" +fileId;
+        System.out.println(url);
+        Response<File> res;
+        
+        Type type = new TypeToken<Response<File>>() { }.getType();
+        try {
+            File file = new File();
+            file.setId(fileId);
+            file.setName(name);
+            file.setExtension(extension);
+            res = (Response<File>) Request.Put(url, file, type);
+        } catch (URISyntaxException | IOException | InterruptedException ex) {
+            res = new Response(new String[]{"Server error"});
+        }
+        
+        return res;
     }
+   
 
     @Override
-    public Response<String> saveMetadata(String userId, File newFile) {
+    public Response<File> saveMetadata(String userId, File newFile) {
+        String url = BASE_URL + "/user/" + userId + "/file";
+        Response<File> res;
+        
+        Type type = new TypeToken<Response<File>>() { }.getType();
         try {
-            return (Response<String>) Request.Post("http://localhost:3001/file", this, Response.class);
+            res = (Response<File>) Request.Post(url, newFile, type);
         } catch (URISyntaxException | IOException | InterruptedException ex) {
-        return new Response<>(new String[0], false, null);
+            res = new Response(new String[]{"Server error"});
         }
+        
+        return res;
     }
     
 }

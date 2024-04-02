@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  apicore:
+    image: diegomated1/mediafile-api-core:${APP_VERSION}
+    container_name: auth_service
+    restart: always
+    depends_on: [mariadb]
+    environment: 
+      - HOST=172.20.0.20
+      - PORT=3000
+      - SRV_AUTH_HOST=localhost
+      - SRV_AUTH_PORT=3001
+      - SRV_FILE_HOST=localhost
+      - SRV_FILE_PORT=3002
+      - SRV_DB_URL=http://localhost:3003
+    ports:
+      - "0.0.0.0:3002:3000"
+    networks:
+      auth_net:
+        ipv4_address: 172.20.0.20
+
+networks:
+  auth_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
+
+volumes:
+  mysqldata:

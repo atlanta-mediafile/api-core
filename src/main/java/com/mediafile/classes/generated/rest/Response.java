@@ -21,6 +21,12 @@ public class Response<T> implements Serializable {
         this.success = success;
         this.data = data;
     }
+    
+    public Response(String[] errors){
+        this.errors = errors;
+        this.success = false;
+        this.data = null;
+    } 
 
     public String[] getErrors() {
         return errors;
