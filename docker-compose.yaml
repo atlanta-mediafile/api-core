@@ -5,8 +5,7 @@ services:
     image: diegomated1/mediafile-api-core:${APP_VERSION}
     container_name: auth_service
     restart: always
-    depends_on: [mariadb]
-    environment: 
+    environment:
       - HOST=172.20.0.20
       - PORT=3000
       - SRV_AUTH_HOST=10.154.12.162
@@ -15,7 +14,7 @@ services:
       - SRV_FILE_PORT=5050
       - SRV_DB_URL=http://10.154.12.163:3000
     ports:
-      - "0.0.0.0:3000:3000"
+      - "0.0.0.0:3000:8080"
     networks:
       auth_net:
         ipv4_address: 172.20.0.20

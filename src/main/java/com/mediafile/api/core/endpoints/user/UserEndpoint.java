@@ -8,6 +8,7 @@ import com.mediafile.api.core.services.user.GetUserService;
 import com.mediafile.api.core.services.user.LoginService;
 import com.mediafile.api.core.services.user.RegisterService;
 import com.mediafile.api.core.utils.Mapper;
+import com.mediafile.classes.generated.soap.EditFileResponse;
 import com.mediafile.classes.generated.soap.GetUser;
 import com.mediafile.classes.generated.soap.GetUserResponse;
 import com.mediafile.classes.generated.soap.Login;
@@ -42,21 +43,39 @@ public class UserEndpoint implements IUserEndpoint {
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "Login")
     public LoginResponse login(@RequestPayload Login request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return loginService.login(request);
+        }catch(Exception ex){
+            LoginResponse res = new LoginResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "Register")
     public RegisterResponse register(@RequestPayload Register request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return registerService.register(request);
+        }catch(Exception ex){
+            RegisterResponse res = new RegisterResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetUser")
     public GetUserResponse getUser(@RequestPayload GetUser request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return getUserService.getUser(request);
+        }catch(Exception ex){
+            GetUserResponse res = new GetUserResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
     
 }

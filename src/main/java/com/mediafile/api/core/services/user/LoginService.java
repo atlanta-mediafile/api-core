@@ -7,6 +7,11 @@ package com.mediafile.api.core.services.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.rmi.IUserRepository;
+import com.mediafile.api.core.utils.Mapper;
+import com.mediafile.classes.generated.soap.Login;
+import com.mediafile.classes.generated.soap.LoginResponse;
+import com.mediafile.rmi.classes.Response;
+import com.mediafile.rmi.classes.args.LoginArgs;
 
 /**
  *
@@ -18,8 +23,24 @@ public class LoginService {
     @Autowired
     private IUserRepository userService;
     
-    public String login(){
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public LoginResponse login(Login request){
+        LoginResponse response = new LoginResponse();
+        
+        Response<String> res = userService.Login(new LoginArgs(
+        request.getEmail(), 
+        request.getPassword())
+        );
+        
+        if(!res.isSuccess()){
+            response.setErrors(Mapper.getErrors(res.getErrors()));
+            response.setSuccess(false);
+            return response;
+        }
+        
+        response.setSuccess(true);
+        response.setData(res.getData());
+       
+        return response;
     } 
     
 }
