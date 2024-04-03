@@ -8,6 +8,10 @@ import com.mediafile.rmi.classes.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.rmi.IUserRepository;
+import com.mediafile.api.core.utils.Mapper;
+import com.mediafile.classes.generated.soap.GetUser;
+import com.mediafile.classes.generated.soap.GetUserResponse;
+import com.mediafile.rmi.classes.Response;
 
 /**
  *
@@ -19,8 +23,27 @@ public class GetUserService {
     @Autowired
     private IUserRepository userService;
     
-    public User getUser(){
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public GetUserResponse getUser(GetUser request){
+        GetUserResponse response = new GetUserResponse();
+        
+        Response<User> res = userService.GetUser(request.getTarget().getUserId());
+        
+        if(!res.isSuccess()){
+            response.setErrors(Mapper.getErrors(res.getErrors()));
+            response.setSuccess(false);
+            return response;
+        }
+        
+        GetUserResponse.Data user = new GetUserResponse.Data();
+        
+        user.setId(res.getData().getId());
+        user.setEmail(res.getData().getEmail());
+        user.setFullname(res.getData().getFullName());
+        
+        response.setSuccess(true);
+        response.setData(user);
+       
+        return response;
     } 
     
 }

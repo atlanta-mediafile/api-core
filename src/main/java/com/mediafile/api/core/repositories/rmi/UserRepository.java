@@ -41,24 +41,39 @@ public class UserRepository extends Thread implements IUserRepository {
     }
 
     @Override
-    public Response<Boolean> Auth(String string) {
-        return new Response(true);
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Response<Boolean> Auth(String token) {
+        try {
+            return this.auhtProvider.Auth(token);
+        } catch (RemoteException ex) {
+            return new Response(new String[]{"Service unavailable"});
+        }
     }
 
     @Override
     public Response<User> GetUser(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return this.auhtProvider.GetUser(id);
+        } catch (RemoteException ex) {
+            return new Response(new String[]{"Service unavailable"});
+        }
     }
 
     @Override
     public Response<String> Login(LoginArgs la) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return this.auhtProvider.Login(la);
+        } catch (RemoteException ex) {
+            return new Response(new String[]{"Service unavailable"});
+        }
     }
 
     @Override
     public Response<String> Register(RegisterArgs ra) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return this.auhtProvider.Register(ra);
+        } catch (RemoteException ex) {
+            return new Response(new String[]{"Service unavailable"});
+        }
     }
     
 }
