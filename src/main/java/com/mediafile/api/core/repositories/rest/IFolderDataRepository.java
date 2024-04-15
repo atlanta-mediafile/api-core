@@ -9,6 +9,7 @@ import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Folder;
 import com.mediafile.classes.generated.rest.FolderResponse;
 import com.mediafile.classes.generated.rest.Response;
+import java.util.Map;
 
 /**
  *
@@ -31,7 +32,7 @@ public interface IFolderDataRepository {
      * @param users users id for share files
      * @return
      */
-    public Response<String> shareFolder(String userId, String folderId, String[] users);
+    public Response<Map<String, Object>> shareFolder(String userId, String folderId, String[] users);
     
     /**
      *  Delete folder
@@ -53,10 +54,11 @@ public interface IFolderDataRepository {
     /**
      *  Edit folder name
      * @param userId user id
-     * @param folder
+     * @param folderId
+     * @param newName
      * @return
      */
-    public Response<Folder> editName(String userId, Folder folder);
+    public Response<Folder> editName(String userId, String folderId, String newName);
     
     /**
      *  Create folder
