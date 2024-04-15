@@ -7,9 +7,10 @@ package com.mediafile.api.core.repositories.rest;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mediafile.classes.generated.rest.DeleteFolderReponse;
-import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Folder;
 import com.mediafile.classes.generated.rest.FolderResponse;
+import com.mediafile.classes.generated.rest.MoveFolderRequest;
+import com.mediafile.classes.generated.rest.RenameFolderRequest;
 import com.mediafile.classes.generated.rest.Response;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -83,8 +84,23 @@ public class FolderDataRepository implements IFolderDataRepository {
     }
 
     @Override
-    public Response<File> moveFolder(String userId, String folderId, String newFolderId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Response<Folder> moveFolder(String userId, String folderId, String newFolderId) {
+        
+        String url = BASE_URL + "/user/" + userId + "/folder/" + folderId;
+        System.out.println(url);
+        Response<Folder> res;
+        
+        Type type = new TypeToken<Response<Folder>>() { }.getType();
+        try {
+            MoveFolderRequest request = new MoveFolderRequest();
+            request.setNewFolderId(newFolderId);
+            res = (Response<Folder>) Request.Patch(url, request, type);
+        } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
+            System.out.println("[api-core] error: " + ex);
+            res = new Response(new String[]{"Server error"});
+        }
+        
+        return res;
     }
 
     @Override
@@ -96,8 +112,9 @@ public class FolderDataRepository implements IFolderDataRepository {
         
         Type type = new TypeToken<Response<Folder>>() { }.getType();
         try {
-            String jsonObj = String.format("{\"name\":\"%s\"}", newName);
-            res = (Response<Folder>) Request.Put(url, jsonObj, type);
+            RenameFolderRequest request = new RenameFolderRequest();
+            request.setName(newName);
+            res = (Response<Folder>) Request.Put(url, request, type);
         } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
             System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});

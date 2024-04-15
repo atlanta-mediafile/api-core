@@ -49,7 +49,7 @@ public interface IFolderDataRepository {
      * @param newFolderId folder id, reference the new folder
      * @return
      */
-    public Response<File> moveFolder(String userId, String folderId, String newFolderId);
+    public Response<Folder> moveFolder(String userId, String folderId, String newFolderId);
     
     /**
      *  Edit folder name
