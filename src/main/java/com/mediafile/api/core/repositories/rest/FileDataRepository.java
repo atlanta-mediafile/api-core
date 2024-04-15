@@ -7,7 +7,6 @@ package com.mediafile.api.core.repositories.rest;
 import com.google.gson.reflect.TypeToken;
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
-import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
@@ -34,6 +33,7 @@ public class FileDataRepository implements IFileDataRepository {
         try {
             res = (Response<File>) Request.Get(url , type);
         } catch (URISyntaxException | IOException | InterruptedException ex) {
+            System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});
         }
         
@@ -69,6 +69,7 @@ public class FileDataRepository implements IFileDataRepository {
             file.setExtension(extension);
             res = (Response<File>) Request.Put(url, file, type);
         } catch (URISyntaxException | IOException | InterruptedException ex) {
+            System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});
         }
         
@@ -85,6 +86,7 @@ public class FileDataRepository implements IFileDataRepository {
         try {
             res = (Response<File>) Request.Post(url, newFile, type);
         } catch (URISyntaxException | IOException | InterruptedException ex) {
+            System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});
         }
         

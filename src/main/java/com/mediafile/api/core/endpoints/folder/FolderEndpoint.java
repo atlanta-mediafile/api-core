@@ -6,6 +6,10 @@ package com.mediafile.api.core.endpoints.folder;
 
 import com.mediafile.api.core.services.file.UploadFileService;
 import com.mediafile.api.core.services.folder.CreateFolderService;
+import com.mediafile.api.core.services.folder.DeleteFolderService;
+import com.mediafile.api.core.services.folder.MoveFolderService;
+import com.mediafile.api.core.services.folder.RenameFolderService;
+import com.mediafile.api.core.services.folder.ShareFolderService;
 import com.mediafile.api.core.utils.Mapper;
 import com.mediafile.classes.generated.rest.Folder;
 import com.mediafile.classes.generated.rest.Response;
@@ -13,6 +17,7 @@ import com.mediafile.classes.generated.soap.CreateFolder;
 import com.mediafile.classes.generated.soap.CreateFolderResponse;
 import com.mediafile.classes.generated.soap.DeleteFolder;
 import com.mediafile.classes.generated.soap.DeleteFolderResponse;
+import com.mediafile.classes.generated.soap.GetFilesResponse;
 import com.mediafile.classes.generated.soap.MoveFolder;
 import com.mediafile.classes.generated.soap.MoveFolderResponse;
 import com.mediafile.classes.generated.soap.RenameFolder;
@@ -37,50 +42,82 @@ public class FolderEndpoint implements IFolderEndpoint {
     @Autowired
     private CreateFolderService createFolder;
     
+    @Autowired
+    private RenameFolderService renameFolder;
+    
+    @Autowired
+    private DeleteFolderService deleteFolder;
+    
+    @Autowired
+    private ShareFolderService shareFolder;
+    
+    @Autowired
+    private MoveFolderService moveFolder;
     
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ShareFolder")
     public ShareFolderResponse shareFolder(@RequestPayload ShareFolder request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return shareFolder.shareFolder(request);
+        }catch(Exception ex){
+            ShareFolderResponse res = new ShareFolderResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteFolder")
     public DeleteFolderResponse deleteFolder(@RequestPayload DeleteFolder request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return deleteFolder.deleteFolder(request);
+        }catch(Exception ex){
+            DeleteFolderResponse res = new DeleteFolderResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "MoveFolder")
     public MoveFolderResponse moveFolder(@RequestPayload MoveFolder request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return moveFolder.moveFolder(request);
+        }catch(Exception ex){
+            MoveFolderResponse res = new MoveFolderResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "CreateFolder")
     public CreateFolderResponse createFolder(@RequestPayload CreateFolder request) {
-        Response<Folder> res = createFolder.createFolder(request);
-        
-        CreateFolderResponse response = new CreateFolderResponse();
-        response.setSuccess(res.isSuccess());
-        response.setErrors(Mapper.getErrors(res.getErrors()));
-        
-        if(res.isSuccess()) {
-            response.setData(res.getData().getId());
+        try{
+            return createFolder.createFolder(request);
+        }catch(Exception ex){
+            System.out.println(ex);
+            CreateFolderResponse res = new CreateFolderResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
         }
-        
-        return response;
     }
 
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "RenameFolder")
     public RenameFolderResponse renameFOlder(@RequestPayload RenameFolder request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return renameFolder.renameFolder(request);
+        }catch(Exception ex){
+            RenameFolderResponse res = new RenameFolderResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
     
 }
