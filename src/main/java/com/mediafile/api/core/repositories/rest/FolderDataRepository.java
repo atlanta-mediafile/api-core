@@ -14,6 +14,7 @@ import com.mediafile.classes.generated.rest.Response;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
+import java.util.Map;
 
 /**
  *
@@ -38,6 +39,7 @@ public class FolderDataRepository implements IFolderDataRepository {
         try {
             res = (Response<FolderResponse>) Request.Get(url, type);
         } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
+            System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error", ex.getMessage()});
         }
         
@@ -45,8 +47,21 @@ public class FolderDataRepository implements IFolderDataRepository {
     }
 
     @Override
-    public Response<String> shareFolder(String userId, String folderId, String[] users) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Response<Map<String, Object>> shareFolder(String userId, String folderId, String[] users) {
+        
+        String url = BASE_URL + "/user/" + userId + "/folder/" + folderId;
+        System.out.println(url);
+        Response<Map<String, Object>> res;
+        
+        Type type = new TypeToken<Response<Map<String, Object>>>() { }.getType();
+        try {
+            res = (Response<Map<String, Object>>) Request.Post(url, users, type);
+        } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
+            System.out.println("[api-core] error: " + ex);
+            res = new Response(new String[]{"Server error"});
+        }
+          
+        return res;
     }
 
     @Override
@@ -60,6 +75,7 @@ public class FolderDataRepository implements IFolderDataRepository {
         try {
             res = (Response<DeleteFolderReponse>) Request.Delete(url, type);
         } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
+            System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});
         }
           
@@ -72,16 +88,18 @@ public class FolderDataRepository implements IFolderDataRepository {
     }
 
     @Override
-    public Response<Folder> editName(String userId, Folder folder) {
+    public Response<Folder> editName(String userId, String folderId, String newName) {
         
-        String url = BASE_URL + "/user/" + userId + "/folder/" + folder.getId();
+        String url = BASE_URL + "/user/" + userId + "/folder/" + folderId;
         System.out.println(url);
         Response<Folder> res;
         
         Type type = new TypeToken<Response<Folder>>() { }.getType();
         try {
-            res = (Response<Folder>) Request.Put(url, folder, type);
+            String jsonObj = String.format("{\"name\":\"%s\"}", newName);
+            res = (Response<Folder>) Request.Put(url, jsonObj, type);
         } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
+            System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});
         }
         
@@ -97,6 +115,7 @@ public class FolderDataRepository implements IFolderDataRepository {
         try {
             res = (Response<Folder>) Request.Post(url, folder, type);
         } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
+            System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});
         }
         
