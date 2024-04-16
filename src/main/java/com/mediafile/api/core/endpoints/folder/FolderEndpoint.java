@@ -58,13 +58,7 @@ public class FolderEndpoint implements IFolderEndpoint {
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ShareFolder")
     public ShareFolderResponse shareFolder(@RequestPayload ShareFolder request) {
-        try{
-            return shareFolder.shareFolder(request);
-        }catch(Exception ex){
-            ShareFolderResponse res = new ShareFolderResponse();
-            res.setErrors(Mapper.getErrors(ex.getMessage()));
-            return res;
-        }
+       throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
