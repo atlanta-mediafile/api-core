@@ -6,8 +6,15 @@ package com.mediafile.api.core.services.file;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.mediafile.api.core.repositories.grpc.IFileRepository;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import com.mediafile.classes.generated.rest.Response;
+import com.mediafile.classes.generated.soap.ShareFile;
+import com.mediafile.classes.generated.soap.Identifiers;
+import com.mediafile.classes.generated.rest.File;
+import com.mediafile.classes.generated.rest.Response;
+import com.mediafile.classes.generated.soap.ShareFileResponse;
+import com.mediafile.api.core.utils.Mapper;
+import java.util.List;
 
 /**
  *
@@ -17,12 +24,28 @@ import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 public class ShareFileService {
     
     @Autowired
-    private IFileRepository metadataService;
-    @Autowired
-    private IFileRepository fileService;
+    private IFileDataRepository fileService;
     
-    public boolean shareFile() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ShareFileResponse shareFile(ShareFile request) {
+        ShareFileResponse response = new ShareFileResponse();
+
+        Identifiers target = request.getTarget();
+        String userId = target.getUserId();
+        String fileId = target.getFileId();
+        List<String> users = request.getUsers().getUser();
+
+        
+        // Llamar al repositorio para compartir el archivo
+        Response<String> res = fileService.shareFile(userId, fileId, users );
+        
+        // Configurar la respuesta
+        response.setSuccess(res.isSuccess());
+        if (!res.isSuccess()) {
+            response.setSuccess(false);
+            response.setErrors(Mapper.getErrors(res.getErrors()));
+            return response;
+        }
+
+        return response;
     }
-    
 }

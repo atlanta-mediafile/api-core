@@ -13,6 +13,7 @@ import com.mediafile.classes.generated.grpc.FileServiceOuterClass.UploadSingleFi
 import com.mediafile.classes.generated.grpc.FileServiceOuterClass.UploadSingleFileResponse;
 import com.mediafile.classes.generated.grpc.FileServiceOuterClass.GetSingleFileRequest;
 import com.mediafile.classes.generated.grpc.FileServiceOuterClass.GetSingleFileResponse;
+import com.mediafile.classes.generated.grpc.FileServiceOuterClass.GetSingleFileResponse;
 import io.grpc.Channel;
 import io.grpc.ManagedChannelBuilder;
 import java.util.Base64;
@@ -78,6 +79,7 @@ public class FileRepository implements IFileRepository {
     public String getFileAsync(String fileId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
+   
     
 }
