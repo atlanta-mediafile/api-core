@@ -12,6 +12,7 @@ import com.mediafile.classes.generated.rest.FolderResponse;
 import com.mediafile.classes.generated.rest.MoveFolderRequest;
 import com.mediafile.classes.generated.rest.RenameFolderRequest;
 import com.mediafile.classes.generated.rest.Response;
+import com.mediafile.classes.generated.rest.ShareFolderRequest;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
@@ -56,7 +57,9 @@ public class FolderDataRepository implements IFolderDataRepository {
         
         Type type = new TypeToken<Response<Map<String, Object>>>() { }.getType();
         try {
-            res = (Response<Map<String, Object>>) Request.Post(url, users, type);
+            ShareFolderRequest request = new ShareFolderRequest();
+            request.setUsers(users);
+            res = (Response<Map<String, Object>>) Request.Post(url, request, type);
         } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
             System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});
