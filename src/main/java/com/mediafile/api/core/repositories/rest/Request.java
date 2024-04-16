@@ -54,7 +54,24 @@ public class Request {
             .build();
         
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.body());
+        var res = gson.fromJson(response.body(), typeOfT);
+        return res;
+    }
+    
+    public static Object Patch(String uri, Object body, Type typeOfT) 
+        throws URISyntaxException, IOException, InterruptedException
+    {
+        Gson gson = new Gson();
+        String json = gson.toJson(body);
+         
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(new URI(uri))
+            .headers("Content-Type", "application/json;charset=UTF-8")
+            .method("PATCH", HttpRequest.BodyPublishers.ofString(json))
+            .build();
+        
+        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
         var res = gson.fromJson(response.body(), typeOfT);
         return res;
     }

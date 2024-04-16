@@ -55,6 +55,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target" type="tns:Identifiers"/>
+                <xs:element name="users"    type="tns:Users"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -115,7 +116,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     <xs:element name="ShareFolder">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="target" type="tns:Identifiers"/>
+                <xs:element name="target"   type="tns:Identifiers"/>
+                <xs:element name="users"    type="tns:Users"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -154,8 +156,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     <xs:element name="RenameFolder">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="target"   type="tns:Identifiers"/>
-                <xs:element name="name"     type="xs:string"/>
+                <xs:element name="target"       type="tns:Identifiers"/>
+                <xs:element name="name"         type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -386,6 +388,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
             <xs:enumeration value="FILE" />
         </xs:restriction>
     </xs:simpleType>
+    
+    <!-- Array of errors type -->
+    <xs:complexType name="Users">
+        <xs:sequence>
+            <xs:element name="user" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
     
     <!-- Array of errors type -->
     <xs:complexType name="Errors">

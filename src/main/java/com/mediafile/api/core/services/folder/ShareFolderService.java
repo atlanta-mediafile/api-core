@@ -6,8 +6,12 @@ package com.mediafile.api.core.services.folder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.mediafile.api.core.repositories.grpc.IFileRepository;
-import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
+import com.mediafile.api.core.utils.Mapper;
+import com.mediafile.classes.generated.rest.Response;
+import com.mediafile.classes.generated.soap.ShareFolder;
+import com.mediafile.classes.generated.soap.ShareFolderResponse;
+import java.util.Map;
 
 /**
  *
@@ -17,12 +21,25 @@ import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 public class ShareFolderService {
     
     @Autowired
-    private IFileRepository metadataService;
-    @Autowired
-    private IFileRepository fileService;
+    private IFolderDataRepository folderDataService;
     
-    public boolean shareFolder() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ShareFolderResponse shareFolder(ShareFolder request) {
+        ShareFolderResponse response = new ShareFolderResponse();
+        
+        Response<Map<String, Object>> res = folderDataService.shareFolder(
+        request.getTarget().getUserId(), 
+        request.getTarget().getFolderId(), 
+        request.getUsers().getUser().toArray(String[]::new)
+        );
+        
+        if(!res.isSuccess()){
+            response.setSuccess(false);
+            response.setErrors(Mapper.getErrors(res.getErrors()));
+            return response;
+        }
+        
+        response.setSuccess(true);
+        return response;
     }
     
 }

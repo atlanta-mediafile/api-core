@@ -7,7 +7,12 @@ package com.mediafile.api.core.services.folder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.grpc.IFileRepository;
-import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
+import com.mediafile.api.core.utils.Mapper;
+import com.mediafile.classes.generated.rest.DeleteFolderReponse;
+import com.mediafile.classes.generated.rest.Response;
+import com.mediafile.classes.generated.soap.DeleteFolder;
+import com.mediafile.classes.generated.soap.DeleteFolderResponse;
 
 /**
  *
@@ -17,12 +22,25 @@ import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 public class DeleteFolderService {
     
     @Autowired
-    private IFileRepository metadataService;
-    @Autowired
-    private IFileRepository fileService;
+    private IFolderDataRepository metadataService;
     
-    public boolean deleteFolder() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public DeleteFolderResponse deleteFolder(DeleteFolder request) {
+        DeleteFolderResponse response = new DeleteFolderResponse();
+        
+        Response<DeleteFolderReponse> res = metadataService.deleteFolder(
+        request.getTarget().getUserId(), 
+        request.getTarget().getFolderId()
+        );
+        
+        if(!res.isSuccess()) {
+            response.setSuccess(false);
+            response.setErrors(Mapper.getErrors(res.getErrors()));
+            return response;
+        }
+        
+        response.setSuccess(true);
+        
+        return response;
     }
     
 }

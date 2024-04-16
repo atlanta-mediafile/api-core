@@ -5,6 +5,7 @@
 package com.mediafile.classes.generated.rest;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  *
@@ -38,6 +39,11 @@ public class Response<T> implements Serializable {
 
     public T getData() {
         return data;
+    }
+
+    @Override
+    public String toString() {
+        return "Response{" + "errors=" + Arrays.toString(errors) + ", success=" + success + ", data=" + data + '}';
     }
     
 }

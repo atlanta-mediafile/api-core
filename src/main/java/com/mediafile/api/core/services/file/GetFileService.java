@@ -7,8 +7,6 @@ package com.mediafile.api.core.services.file;
 import com.mediafile.classes.generated.soap.GetFilesResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.mediafile.api.core.repositories.grpc.IFileRepository;
-import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
 import com.mediafile.api.core.utils.Mapper;
 import com.mediafile.classes.generated.rest.File;
@@ -43,13 +41,26 @@ public class GetFileService {
         if(!res.isSuccess()){
             response.setSuccess(false);
             response.setErrors(Mapper.getErrors(res.getErrors()));
+            return response;
         }
         
         GetFilesResponse.Data data = new GetFilesResponse.Data();
         
         FilesInfo files = new FilesInfo();
         
-        for (File file : res.getData().getFiles()) {
+        File[] _files = new File[0];
+        
+        if(res.getData().getFiles() != null){
+            _files = res.getData().getFiles();
+        }
+        
+        Folder[] _folders = new Folder[0];
+
+        if(res.getData().getFolders() != null){
+            _folders = res.getData().getFolders();
+        }
+        
+        for (File file : _files) {
             FileInfo fileRes = new FileInfo();
             fileRes.setId(file.getId());
             fileRes.setFolderId(file.getFolderId());
@@ -62,11 +73,12 @@ public class GetFileService {
         
         Folders folders = new Folders();
         
-        for (Folder folder : res.getData().getFolders()) {
+        for (Folder folder : _folders) {
             FolderInfo folderRes = new FolderInfo();
             folderRes.setId(folder.getId());
             folderRes.setName(folder.getName());
             folderRes.setFolderId(folder.getParentId());
+            folders.getFolders().add(folderRes);
         }
         
         data.setFiles(files);

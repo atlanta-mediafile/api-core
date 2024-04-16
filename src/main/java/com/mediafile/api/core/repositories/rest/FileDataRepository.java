@@ -4,13 +4,15 @@
  */
 package com.mediafile.api.core.repositories.rest;
 
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
-import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -34,6 +36,7 @@ public class FileDataRepository implements IFileDataRepository {
         try {
             res = (Response<File>) Request.Get(url , type);
         } catch (URISyntaxException | IOException | InterruptedException ex) {
+            System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});
         }
         
@@ -41,14 +44,37 @@ public class FileDataRepository implements IFileDataRepository {
     }
     
     @Override
-    public Response<String> shareFile(String userId, String fileId, String[] users) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Response<String> shareFile(String userId, String fileId, List<String> users) {
+        String url = BASE_URL + "/user/" + userId + "/folder/" + fileId;
+        System.out.println(url);
+        
+        Response<String> res;
+       
+        Type type = new TypeToken<Response<String>>() { }.getType();
+        try {
+            res = (Response<String>) Request.Post(url, users, type);
+        } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
+            System.out.println("[api-core] error: " + ex);
+            res = new Response(new String[]{"Server error"});
+        }
+          
+        return res;
     }
 
     @Override
     public Response<File> deleteFile(String userId, String fileId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    String url = BASE_URL + "/user/" + userId + "/file/" + fileId;
+    Response<File> res;
+
+    Type type = new TypeToken<Response<File>>() {}.getType();
+    try {
+        res = (Response<File>) Request.Delete(url, type);
+    } catch (URISyntaxException | IOException | InterruptedException ex) {
+        res = new Response<>(new String[]{"Server error"});
     }
+
+    return res;
+}
 
     @Override
     public Response<File> moveFile(String userId, String fileId, String folderId) {
@@ -69,6 +95,7 @@ public class FileDataRepository implements IFileDataRepository {
             file.setExtension(extension);
             res = (Response<File>) Request.Put(url, file, type);
         } catch (URISyntaxException | IOException | InterruptedException ex) {
+            System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});
         }
         
@@ -85,6 +112,7 @@ public class FileDataRepository implements IFileDataRepository {
         try {
             res = (Response<File>) Request.Post(url, newFile, type);
         } catch (URISyntaxException | IOException | InterruptedException ex) {
+            System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});
         }
         

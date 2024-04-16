@@ -7,9 +7,11 @@ package com.mediafile.api.core.services.folder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
+import com.mediafile.api.core.utils.Mapper;
 import com.mediafile.classes.generated.rest.Folder;
 import com.mediafile.classes.generated.rest.Response;
 import com.mediafile.classes.generated.soap.CreateFolder;
+import com.mediafile.classes.generated.soap.CreateFolderResponse;
 import java.time.Instant;
 import java.util.Date;
 import java.util.UUID;
@@ -25,19 +27,29 @@ public class CreateFolderService {
     @Autowired
     private IFolderDataRepository folderRepository;
     
-    public Response createFolder(CreateFolder request) {
+    public CreateFolderResponse createFolder(CreateFolder request) {
+        CreateFolderResponse response = new CreateFolderResponse();
         
         UUID folderId = UUID.randomUUID();
-        Instant timestamp = Instant.now();
 
         Folder folder = new Folder();
         folder.setId(folderId.toString());
         folder.setName(request.getName());
-        folder.setParentId(request.getFolderId());
+        folder.setParentId(request.getTarget().getFolderId());
         folder.setCreatedDate(new Date());
         folder.setStatus(true);
         
-        return this.folderRepository.createFolder(request.getTarget().getUserId(), folder);
+        Response<Folder> res = this.folderRepository.createFolder(request.getTarget().getUserId(), folder);
+        
+        if(!res.isSuccess()){
+            response.setSuccess(false);
+            response.setErrors(Mapper.getErrors(res.getErrors()));
+            return response;
+        }
+        
+        response.setData(res.getData().getId());
+        
+        return response;
     }
     
 }
