@@ -25,6 +25,7 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import com.mediafile.api.core.services.file.UploadFileService;
+import com.mediafile.api.core.services.file.DeleteFileService;
 import com.mediafile.api.core.utils.Mapper;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import com.mediafile.api.core.services.file.downloadFileService;
@@ -51,6 +52,9 @@ public class FileEndpoint implements IFileEndpoint {
     
     @Autowired
     private GetFileService getFileService;
+    
+    @Autowired
+    private DeleteFileService deleteFile;
     
     @Override
     @ResponsePayload
@@ -89,7 +93,13 @@ public class FileEndpoint implements IFileEndpoint {
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteFile")
     public DeleteFileResponse deleteFile(@RequestPayload DeleteFile request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return deleteFile.deleteFile(request);
+        }catch(Exception ex){
+            DeleteFileResponse res = new DeleteFileResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
     @Override

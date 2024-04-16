@@ -8,6 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.grpc.IFileRepository;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
+import com.mediafile.classes.generated.soap.DeleteFile;
+import com.mediafile.classes.generated.soap.Identifiers;
+import com.mediafile.classes.generated.rest.File;
+import com.mediafile.classes.generated.rest.Response;
+import com.mediafile.classes.generated.soap.DeleteFileResponse;
+import com.mediafile.api.core.utils.Mapper;
 
 /**
  *
@@ -17,12 +23,27 @@ import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 public class DeleteFileService {
     
     @Autowired
-    private IFileRepository metadataService;
-    @Autowired
-    private IFileRepository fileService;
+    private IFileDataRepository fileService;
     
-    public boolean deleteFile() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public DeleteFileResponse deleteFile(DeleteFile request) {
+        DeleteFileResponse response = new DeleteFileResponse();
+
+        // Obtener los datos de la solicitud
+        
+        String userId = request.getTarget().getUserId();
+        String fileId = request.getTarget().getFileId();
+  
+
+        Response<File> res = fileService.deleteFile(userId,fileId);
+        response.setSuccess(res.isSuccess());
+        if(!res.isSuccess()){
+            response.setSuccess(false);
+            response.setErrors(Mapper.getErrors(res.getErrors()));
+            return response;
+        }
+
+        return response;
+        
+
     }
-    
 }
