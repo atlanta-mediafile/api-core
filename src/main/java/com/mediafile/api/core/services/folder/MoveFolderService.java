@@ -8,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
 import com.mediafile.api.core.utils.Mapper;
-import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Folder;
 import com.mediafile.classes.generated.rest.Response;
-import com.mediafile.classes.generated.soap.MoveFolder;
+import com.mediafile.classes.generated.soap.MoveFolderRequest;
 import com.mediafile.classes.generated.soap.MoveFolderResponse;
 
 /**
@@ -24,7 +23,7 @@ public class MoveFolderService {
     @Autowired
     private IFolderDataRepository folderDataService;
     
-    public MoveFolderResponse moveFolder(MoveFolder request) {
+    public MoveFolderResponse moveFolder(MoveFolderRequest request) {
         MoveFolderResponse response = new MoveFolderResponse();
         
         Response<Folder> res = folderDataService.moveFolder(

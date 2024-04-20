@@ -12,7 +12,7 @@ import com.mediafile.api.core.utils.Base64Utils;
 import com.mediafile.api.core.utils.Mapper;
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
-import com.mediafile.classes.generated.soap.UploadFile;
+import com.mediafile.classes.generated.soap.UploadFileRequest;
 import com.mediafile.classes.generated.soap.UploadFileResponse;
 import java.util.Date;
 
@@ -28,7 +28,7 @@ public class UploadFileService {
     @Autowired
     private IFileRepository fileRepo;
     
-    public UploadFileResponse uploadFile(UploadFile uploadFile) throws Exception {
+    public UploadFileResponse uploadFile(UploadFileRequest uploadFile) throws Exception {
         
         UploadFileResponse response = new UploadFileResponse();
         

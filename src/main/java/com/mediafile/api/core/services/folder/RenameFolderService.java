@@ -6,13 +6,11 @@ package com.mediafile.api.core.services.folder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
 import com.mediafile.api.core.utils.Mapper;
-import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Folder;
 import com.mediafile.classes.generated.rest.Response;
-import com.mediafile.classes.generated.soap.RenameFolder;
+import com.mediafile.classes.generated.soap.RenameFolderRequest;
 import com.mediafile.classes.generated.soap.RenameFolderResponse;
 
 /**
@@ -25,7 +23,7 @@ public class RenameFolderService {
     @Autowired
     private IFolderDataRepository folderDataService;
     
-    public RenameFolderResponse renameFolder(RenameFolder request) {
+    public RenameFolderResponse renameFolder(RenameFolderRequest request) {
         
         RenameFolderResponse response = new RenameFolderResponse();
         

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
 import com.mediafile.api.core.utils.Mapper;
 import com.mediafile.classes.generated.rest.Response;
-import com.mediafile.classes.generated.soap.ShareFolder;
+import com.mediafile.classes.generated.soap.ShareFolderRequest;
 import com.mediafile.classes.generated.soap.ShareFolderResponse;
 import java.util.Map;
 
@@ -23,7 +23,7 @@ public class ShareFolderService {
     @Autowired
     private IFolderDataRepository folderDataService;
     
-    public ShareFolderResponse shareFolder(ShareFolder request) {
+    public ShareFolderResponse shareFolder(ShareFolderRequest request) {
         ShareFolderResponse response = new ShareFolderResponse();
         
         Response<Map<String, Object>> res = folderDataService.shareFolder(

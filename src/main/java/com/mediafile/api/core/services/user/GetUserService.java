@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.rmi.IUserRepository;
 import com.mediafile.api.core.utils.Mapper;
-import com.mediafile.classes.generated.soap.GetUser;
+import com.mediafile.classes.generated.soap.GetUserRequest;
 import com.mediafile.classes.generated.soap.GetUserResponse;
 import com.mediafile.rmi.classes.Response;
 
@@ -23,7 +23,7 @@ public class GetUserService {
     @Autowired
     private IUserRepository userService;
     
-    public GetUserResponse getUser(GetUser request){
+    public GetUserResponse getUser(GetUserRequest request){
         GetUserResponse response = new GetUserResponse();
         
         Response<User> res = userService.GetUser(request.getTarget().getUserId());

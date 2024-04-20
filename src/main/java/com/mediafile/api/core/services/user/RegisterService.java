@@ -4,12 +4,11 @@
  */
 package com.mediafile.api.core.services.user;
 
-import com.mediafile.rmi.classes.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.rmi.IUserRepository;
 import com.mediafile.api.core.utils.Mapper;
-import com.mediafile.classes.generated.soap.Register;
+import com.mediafile.classes.generated.soap.RegisterRequest;
 import com.mediafile.classes.generated.soap.RegisterResponse;
 import com.mediafile.rmi.classes.Response;
 import com.mediafile.rmi.classes.args.RegisterArgs;
@@ -25,7 +24,7 @@ public class RegisterService {
     @Autowired
     private IUserRepository userService;
     
-    public RegisterResponse register(Register request){
+    public RegisterResponse register(RegisterRequest request){
         RegisterResponse response = new RegisterResponse();
         
         Response<String> res = userService.Register(new RegisterArgs(

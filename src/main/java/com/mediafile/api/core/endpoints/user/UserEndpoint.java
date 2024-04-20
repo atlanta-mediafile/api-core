@@ -9,11 +9,11 @@ import com.mediafile.api.core.services.user.LoginService;
 import com.mediafile.api.core.services.user.RegisterService;
 import com.mediafile.api.core.utils.Mapper;
 import com.mediafile.classes.generated.soap.EditFileResponse;
-import com.mediafile.classes.generated.soap.GetUser;
+import com.mediafile.classes.generated.soap.GetUserRequest;
 import com.mediafile.classes.generated.soap.GetUserResponse;
-import com.mediafile.classes.generated.soap.Login;
+import com.mediafile.classes.generated.soap.LoginRequest;
 import com.mediafile.classes.generated.soap.LoginResponse;
-import com.mediafile.classes.generated.soap.Register;
+import com.mediafile.classes.generated.soap.RegisterRequest;
 import com.mediafile.classes.generated.soap.RegisterResponse;
 import com.mediafile.rmi.classes.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class UserEndpoint implements IUserEndpoint {
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "Login")
-    public LoginResponse login(@RequestPayload Login request) {
+    public LoginResponse login(@RequestPayload LoginRequest request) {
         try{
             return loginService.login(request);
         }catch(Exception ex){
@@ -55,7 +55,7 @@ public class UserEndpoint implements IUserEndpoint {
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "Register")
-    public RegisterResponse register(@RequestPayload Register request) {
+    public RegisterResponse register(@RequestPayload RegisterRequest request) {
         try{
             return registerService.register(request);
         }catch(Exception ex){
@@ -68,7 +68,7 @@ public class UserEndpoint implements IUserEndpoint {
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetUser")
-    public GetUserResponse getUser(@RequestPayload GetUser request) {
+    public GetUserResponse getUser(@RequestPayload GetUserRequest request) {
         try{
             return getUserService.getUser(request);
         }catch(Exception ex){
