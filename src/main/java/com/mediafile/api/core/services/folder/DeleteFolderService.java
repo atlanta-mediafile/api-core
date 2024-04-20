@@ -6,12 +6,11 @@ package com.mediafile.api.core.services.folder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.mediafile.api.core.repositories.grpc.IFileRepository;
 import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
 import com.mediafile.api.core.utils.Mapper;
 import com.mediafile.classes.generated.rest.DeleteFolderReponse;
 import com.mediafile.classes.generated.rest.Response;
-import com.mediafile.classes.generated.soap.DeleteFolder;
+import com.mediafile.classes.generated.soap.DeleteFolderRequest;
 import com.mediafile.classes.generated.soap.DeleteFolderResponse;
 
 /**
@@ -24,7 +23,7 @@ public class DeleteFolderService {
     @Autowired
     private IFolderDataRepository metadataService;
     
-    public DeleteFolderResponse deleteFolder(DeleteFolder request) {
+    public DeleteFolderResponse deleteFolder(DeleteFolderRequest request) {
         DeleteFolderResponse response = new DeleteFolderResponse();
         
         Response<DeleteFolderReponse> res = metadataService.deleteFolder(

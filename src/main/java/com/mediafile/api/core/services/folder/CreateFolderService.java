@@ -10,9 +10,8 @@ import com.mediafile.api.core.repositories.rest.IFolderDataRepository;
 import com.mediafile.api.core.utils.Mapper;
 import com.mediafile.classes.generated.rest.Folder;
 import com.mediafile.classes.generated.rest.Response;
-import com.mediafile.classes.generated.soap.CreateFolder;
+import com.mediafile.classes.generated.soap.CreateFolderRequest;
 import com.mediafile.classes.generated.soap.CreateFolderResponse;
-import java.time.Instant;
 import java.util.Date;
 import java.util.UUID;
 
@@ -27,7 +26,7 @@ public class CreateFolderService {
     @Autowired
     private IFolderDataRepository folderRepository;
     
-    public CreateFolderResponse createFolder(CreateFolder request) {
+    public CreateFolderResponse createFolder(CreateFolderRequest request) {
         CreateFolderResponse response = new CreateFolderResponse();
         
         UUID folderId = UUID.randomUUID();

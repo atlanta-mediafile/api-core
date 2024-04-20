@@ -4,25 +4,21 @@
  */
 package com.mediafile.api.core.endpoints.folder;
 
-import com.mediafile.api.core.services.file.UploadFileService;
 import com.mediafile.api.core.services.folder.CreateFolderService;
 import com.mediafile.api.core.services.folder.DeleteFolderService;
 import com.mediafile.api.core.services.folder.MoveFolderService;
 import com.mediafile.api.core.services.folder.RenameFolderService;
 import com.mediafile.api.core.services.folder.ShareFolderService;
 import com.mediafile.api.core.utils.Mapper;
-import com.mediafile.classes.generated.rest.Folder;
-import com.mediafile.classes.generated.rest.Response;
-import com.mediafile.classes.generated.soap.CreateFolder;
+import com.mediafile.classes.generated.soap.CreateFolderRequest;
 import com.mediafile.classes.generated.soap.CreateFolderResponse;
-import com.mediafile.classes.generated.soap.DeleteFolder;
+import com.mediafile.classes.generated.soap.DeleteFolderRequest;
 import com.mediafile.classes.generated.soap.DeleteFolderResponse;
-import com.mediafile.classes.generated.soap.GetFilesResponse;
-import com.mediafile.classes.generated.soap.MoveFolder;
+import com.mediafile.classes.generated.soap.MoveFolderRequest;
 import com.mediafile.classes.generated.soap.MoveFolderResponse;
-import com.mediafile.classes.generated.soap.RenameFolder;
+import com.mediafile.classes.generated.soap.RenameFolderRequest;
 import com.mediafile.classes.generated.soap.RenameFolderResponse;
-import com.mediafile.classes.generated.soap.ShareFolder;
+import com.mediafile.classes.generated.soap.ShareFolderRequest;
 import com.mediafile.classes.generated.soap.ShareFolderResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -57,14 +53,14 @@ public class FolderEndpoint implements IFolderEndpoint {
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ShareFolder")
-    public ShareFolderResponse shareFolder(@RequestPayload ShareFolder request) {
+    public ShareFolderResponse shareFolder(@RequestPayload ShareFolderRequest request) {
        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteFolder")
-    public DeleteFolderResponse deleteFolder(@RequestPayload DeleteFolder request) {
+    public DeleteFolderResponse deleteFolder(@RequestPayload DeleteFolderRequest request) {
         try{
             return deleteFolder.deleteFolder(request);
         }catch(Exception ex){
@@ -77,7 +73,7 @@ public class FolderEndpoint implements IFolderEndpoint {
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "MoveFolder")
-    public MoveFolderResponse moveFolder(@RequestPayload MoveFolder request) {
+    public MoveFolderResponse moveFolder(@RequestPayload MoveFolderRequest request) {
         try{
             return moveFolder.moveFolder(request);
         }catch(Exception ex){
@@ -90,7 +86,7 @@ public class FolderEndpoint implements IFolderEndpoint {
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "CreateFolder")
-    public CreateFolderResponse createFolder(@RequestPayload CreateFolder request) {
+    public CreateFolderResponse createFolder(@RequestPayload CreateFolderRequest request) {
         try{
             return createFolder.createFolder(request);
         }catch(Exception ex){
@@ -104,7 +100,7 @@ public class FolderEndpoint implements IFolderEndpoint {
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "RenameFolder")
-    public RenameFolderResponse renameFOlder(@RequestPayload RenameFolder request) {
+    public RenameFolderResponse renameFOlder(@RequestPayload RenameFolderRequest request) {
         try{
             return renameFolder.renameFolder(request);
         }catch(Exception ex){

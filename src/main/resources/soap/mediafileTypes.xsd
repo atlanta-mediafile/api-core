@@ -12,7 +12,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     elementFormDefault="qualified"
 >
     <!-- Login endpoint -->
-    <xs:element name="Login">
+    <xs:element name="LoginRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="email"    type="xs:string"/>
@@ -22,7 +22,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
 
     <!-- Register endpoint -->
-    <xs:element name="Register">
+    <xs:element name="RegisterRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="email"    type="xs:string"/>
@@ -33,7 +33,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
     
     <!-- Get user endpoint -->
-    <xs:element name="GetUser">
+    <xs:element name="GetUserRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target" type="tns:Identifiers"/>
@@ -42,7 +42,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
     
     <!--  Get files and folder metada from folder  endpoint-->
-    <xs:element name="GetFiles">
+    <xs:element name="GetFilesRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target" type="tns:Identifiers"/>
@@ -51,7 +51,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
     
     <!-- Share file endpoint -->
-    <xs:element name="ShareFile">
+    <xs:element name="ShareFileRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target" type="tns:Identifiers"/>
@@ -61,7 +61,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
     
     <!-- Upload file endpoint -->
-    <xs:element name="UploadFile">
+    <xs:element name="UploadFileRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target"       type="tns:Identifiers"/>
@@ -74,7 +74,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
     
     <!-- Delete file endpoint -->
-    <xs:element name="DeleteFile">
+    <xs:element name="DeleteFileRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target" type="tns:Identifiers"/>
@@ -83,7 +83,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
     
     <!-- Move file endpoint -->
-    <xs:element name="MoveFile">
+    <xs:element name="MoveFileRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target"   type="tns:Identifiers"/>
@@ -93,7 +93,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
     
     <!-- Edit file endpoint -->
-    <xs:element name="EditFile">
+    <xs:element name="EditFileRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target"       type="tns:Identifiers"/>
@@ -104,7 +104,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
     
     <!-- Download files endpoint -->
-    <xs:element name="DownloadFiles">
+    <xs:element name="DownloadFilesRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target" type="tns:Identifiers"/>               
@@ -113,7 +113,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
     
     <!-- Share folder endpoint -->
-    <xs:element name="ShareFolder">
+    <xs:element name="ShareFolderRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target"   type="tns:Identifiers"/>
@@ -123,7 +123,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
     
     <!-- Delete folder endpoint -->
-    <xs:element name="DeleteFolder">
+    <xs:element name="DeleteFolderRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target" type="tns:Identifiers"/>
@@ -132,7 +132,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
     
     <!-- Move folder endpoint -->
-    <xs:element name="MoveFolder">
+    <xs:element name="MoveFolderRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target"   type="tns:Identifiers"/>
@@ -142,7 +142,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
     
     <!-- Create folder endpoint -->
-    <xs:element name="CreateFolder">
+    <xs:element name="CreateFolderRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target"   type="tns:Identifiers"/>
@@ -153,7 +153,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
     </xs:element>
 
     <!-- Create folder endpoint -->
-    <xs:element name="RenameFolder">
+    <xs:element name="RenameFolderRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="target"       type="tns:Identifiers"/>

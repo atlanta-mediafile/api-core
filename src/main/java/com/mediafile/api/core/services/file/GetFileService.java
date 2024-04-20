@@ -17,7 +17,7 @@ import com.mediafile.classes.generated.soap.FileInfo;
 import com.mediafile.classes.generated.soap.FilesInfo;
 import com.mediafile.classes.generated.soap.FolderInfo;
 import com.mediafile.classes.generated.soap.Folders;
-import com.mediafile.classes.generated.soap.GetFiles;
+import com.mediafile.classes.generated.soap.GetFilesRequest;
 import java.math.BigInteger;
 
 /**
@@ -30,7 +30,7 @@ public class GetFileService {
     @Autowired
     private IFolderDataRepository metadataRepository;
     
-    public GetFilesResponse getFile(GetFiles request) {
+    public GetFilesResponse getFile(GetFilesRequest request) {
         GetFilesResponse response = new GetFilesResponse();
         
         Response<FolderResponse> res = metadataRepository.getFolder(

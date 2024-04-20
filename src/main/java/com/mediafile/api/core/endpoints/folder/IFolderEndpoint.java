@@ -4,15 +4,15 @@
  */
 package com.mediafile.api.core.endpoints.folder;
 
-import com.mediafile.classes.generated.soap.CreateFolder;
+import com.mediafile.classes.generated.soap.CreateFolderRequest;
 import com.mediafile.classes.generated.soap.CreateFolderResponse;
-import com.mediafile.classes.generated.soap.DeleteFolder;
+import com.mediafile.classes.generated.soap.DeleteFolderRequest;
 import com.mediafile.classes.generated.soap.DeleteFolderResponse;
-import com.mediafile.classes.generated.soap.MoveFolder;
+import com.mediafile.classes.generated.soap.MoveFolderRequest;
 import com.mediafile.classes.generated.soap.MoveFolderResponse;
-import com.mediafile.classes.generated.soap.RenameFolder;
+import com.mediafile.classes.generated.soap.RenameFolderRequest;
 import com.mediafile.classes.generated.soap.RenameFolderResponse;
-import com.mediafile.classes.generated.soap.ShareFolder;
+import com.mediafile.classes.generated.soap.ShareFolderRequest;
 import com.mediafile.classes.generated.soap.ShareFolderResponse;
 
 /**
@@ -21,14 +21,14 @@ import com.mediafile.classes.generated.soap.ShareFolderResponse;
  */
 public interface IFolderEndpoint {
     
-    public ShareFolderResponse shareFolder(ShareFolder request);
+    public ShareFolderResponse shareFolder(ShareFolderRequest request);
     
-    public DeleteFolderResponse deleteFolder(DeleteFolder request);
+    public DeleteFolderResponse deleteFolder(DeleteFolderRequest request);
     
-    public MoveFolderResponse moveFolder(MoveFolder request);
+    public MoveFolderResponse moveFolder(MoveFolderRequest request);
     
-    public CreateFolderResponse createFolder(CreateFolder request);
+    public CreateFolderResponse createFolder(CreateFolderRequest request);
     
-    public RenameFolderResponse renameFOlder(RenameFolder request);
+    public RenameFolderResponse renameFOlder(RenameFolderRequest request);
     
 }
