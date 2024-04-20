@@ -41,7 +41,7 @@ public class UserEndpoint implements IUserEndpoint {
     
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "Login")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "LoginRequest")
     public LoginResponse login(@RequestPayload LoginRequest request) {
         try{
             return loginService.login(request);
@@ -54,7 +54,7 @@ public class UserEndpoint implements IUserEndpoint {
 
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "Register")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "RegisterRequest")
     public RegisterResponse register(@RequestPayload RegisterRequest request) {
         try{
             return registerService.register(request);
@@ -67,7 +67,7 @@ public class UserEndpoint implements IUserEndpoint {
 
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetUser")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetUserRequest")
     public GetUserResponse getUser(@RequestPayload GetUserRequest request) {
         try{
             return getUserService.getUser(request);

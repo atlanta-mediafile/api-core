@@ -52,14 +52,14 @@ public class FolderEndpoint implements IFolderEndpoint {
     
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ShareFolder")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ShareFolderRequest")
     public ShareFolderResponse shareFolder(@RequestPayload ShareFolderRequest request) {
        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteFolder")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteFolderRequest")
     public DeleteFolderResponse deleteFolder(@RequestPayload DeleteFolderRequest request) {
         try{
             return deleteFolder.deleteFolder(request);
@@ -72,7 +72,7 @@ public class FolderEndpoint implements IFolderEndpoint {
 
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "MoveFolder")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "MoveFolderRequest")
     public MoveFolderResponse moveFolder(@RequestPayload MoveFolderRequest request) {
         try{
             return moveFolder.moveFolder(request);
@@ -85,7 +85,7 @@ public class FolderEndpoint implements IFolderEndpoint {
 
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "CreateFolder")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "CreateFolderRequest")
     public CreateFolderResponse createFolder(@RequestPayload CreateFolderRequest request) {
         try{
             return createFolder.createFolder(request);
@@ -99,7 +99,7 @@ public class FolderEndpoint implements IFolderEndpoint {
 
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "RenameFolder")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "RenameFolderRequest")
     public RenameFolderResponse renameFOlder(@RequestPayload RenameFolderRequest request) {
         try{
             return renameFolder.renameFolder(request);
