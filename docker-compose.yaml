@@ -9,7 +9,7 @@ services:
       - HOST=172.20.0.20
       - PORT=3000
       - SRV_AUTH_HOST=10.154.12.162
-      - SRV_AUTH_PORT=3001
+      - SRV_AUTH_PORT=3000
       - SRV_FILE_HOST=10.154.12.164
       - SRV_FILE_PORT=5050
       - SRV_DB_URL=http://10.154.12.163:3000
