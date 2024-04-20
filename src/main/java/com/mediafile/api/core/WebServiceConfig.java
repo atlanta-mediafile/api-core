@@ -34,7 +34,7 @@ import org.springframework.ws.server.EndpointInterceptor;
 @EnableWs
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter  {
-
+    
     @Bean
     public AuthInterceptor authInterceptor() {
         return new AuthInterceptor();

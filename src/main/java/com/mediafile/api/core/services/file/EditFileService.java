@@ -2,12 +2,11 @@ package com.mediafile.api.core.services.file;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.mediafile.api.core.repositories.grpc.IFileRepository;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 import com.mediafile.api.core.utils.Mapper;
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
-import com.mediafile.classes.generated.soap.EditFile;
+import com.mediafile.classes.generated.soap.EditFileRequest;
 import com.mediafile.classes.generated.soap.EditFileResponse;
 
 @Component
@@ -17,7 +16,7 @@ public class EditFileService {
     @Autowired
     private IFileDataRepository fileService;
     
-    public EditFileResponse editFile(EditFile request) {
+    public EditFileResponse editFile(EditFileRequest request) {
         
         
         EditFileResponse response = new EditFileResponse();

@@ -7,10 +7,8 @@ package com.mediafile.api.core.services.file;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
-import com.mediafile.classes.generated.rest.Response;
-import com.mediafile.classes.generated.soap.ShareFile;
+import com.mediafile.classes.generated.soap.ShareFileRequest;
 import com.mediafile.classes.generated.soap.Identifiers;
-import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
 import com.mediafile.classes.generated.soap.ShareFileResponse;
 import com.mediafile.api.core.utils.Mapper;
@@ -26,7 +24,7 @@ public class ShareFileService {
     @Autowired
     private IFileDataRepository fileService;
     
-    public ShareFileResponse shareFile(ShareFile request) {
+    public ShareFileResponse shareFile(ShareFileRequest request) {
         ShareFileResponse response = new ShareFileResponse();
 
         Identifiers target = request.getTarget();

@@ -4,21 +4,21 @@
  */
 package com.mediafile.api.core.endpoints.file;
 
-import com.mediafile.classes.generated.soap.DeleteFile;
+import com.mediafile.classes.generated.soap.DeleteFileRequest;
 import com.mediafile.classes.generated.soap.DeleteFileResponse;
-import com.mediafile.classes.generated.soap.DownloadFiles;
+import com.mediafile.classes.generated.soap.DownloadFilesRequest;
 import com.mediafile.classes.generated.soap.DownloadFilesResponse;
-import com.mediafile.classes.generated.soap.EditFile;
+import com.mediafile.classes.generated.soap.EditFileRequest;
 import com.mediafile.classes.generated.soap.EditFileResponse;
 import com.mediafile.api.core.services.file.EditFileService;
 import com.mediafile.api.core.services.file.GetFileService;
-import com.mediafile.classes.generated.soap.GetFiles;
+import com.mediafile.classes.generated.soap.GetFilesRequest;
 import com.mediafile.classes.generated.soap.GetFilesResponse;
-import com.mediafile.classes.generated.soap.MoveFile;
+import com.mediafile.classes.generated.soap.MoveFileRequest;
 import com.mediafile.classes.generated.soap.MoveFileResponse;
-import com.mediafile.classes.generated.soap.ShareFile;
+import com.mediafile.classes.generated.soap.ShareFileRequest;
 import com.mediafile.classes.generated.soap.ShareFileResponse;
-import com.mediafile.classes.generated.soap.UploadFile;
+import com.mediafile.classes.generated.soap.UploadFileRequest;
 import com.mediafile.classes.generated.soap.UploadFileResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -26,6 +26,7 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import com.mediafile.api.core.services.file.UploadFileService;
 import com.mediafile.api.core.services.file.DeleteFileService;
+import com.mediafile.api.core.services.file.ShareFileService;
 import com.mediafile.api.core.utils.Mapper;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import com.mediafile.api.core.services.file.downloadFileService;
@@ -56,10 +57,15 @@ public class FileEndpoint implements IFileEndpoint {
     @Autowired
     private DeleteFileService deleteFile;
     
+    @Autowired
+    private ShareFileService shareFile;
+    
+    
+    
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetFiles")
-    public GetFilesResponse getFiles(@RequestPayload GetFiles request) {
+    public GetFilesResponse getFiles(@RequestPayload GetFilesRequest request) {
         try{
             return getFileService.getFile(request);
         }catch(Exception ex){
@@ -72,14 +78,20 @@ public class FileEndpoint implements IFileEndpoint {
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ShareFile")
-    public ShareFileResponse shareFile(@RequestPayload ShareFile request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ShareFileResponse shareFile(@RequestPayload ShareFileRequest request) {
+        try{
+            return shareFile.shareFile(request);
+        }catch(Exception ex){
+            ShareFileResponse res = new ShareFileResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "UploadFile")
-    public UploadFileResponse uploadFile(@RequestPayload UploadFile request) {
+    public UploadFileResponse uploadFile(@RequestPayload UploadFileRequest request) {
         try{
             return uploadFile.uploadFile(request);
         }catch(Exception ex){
@@ -92,7 +104,7 @@ public class FileEndpoint implements IFileEndpoint {
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteFile")
-    public DeleteFileResponse deleteFile(@RequestPayload DeleteFile request) {
+    public DeleteFileResponse deleteFile(@RequestPayload DeleteFileRequest request) {
         try{
             return deleteFile.deleteFile(request);
         }catch(Exception ex){
@@ -105,14 +117,14 @@ public class FileEndpoint implements IFileEndpoint {
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "MoveFile")
-    public MoveFileResponse moveFile(@RequestPayload MoveFile request) {
+    public MoveFileResponse moveFile(@RequestPayload MoveFileRequest request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "EditFile")
-    public EditFileResponse editFile(@RequestPayload EditFile request) {
+    public EditFileResponse editFile(@RequestPayload EditFileRequest request) {
         try{
             return editFileService.editFile(request);
         }catch(Exception ex){
@@ -125,7 +137,7 @@ public class FileEndpoint implements IFileEndpoint {
     @Override
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DownloadFiles")
-    public DownloadFilesResponse downloadFile(@RequestPayload DownloadFiles request) {
+    public DownloadFilesResponse downloadFile(@RequestPayload DownloadFilesRequest request) {
          File file = downloadFile.downloadFile(request);
 
 
