@@ -38,6 +38,7 @@ public class DeleteFolderService {
         }
         
         response.setSuccess(true);
+        response.setErrors(Mapper.getErrors());
         
         return response;
     }

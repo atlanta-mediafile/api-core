@@ -86,6 +86,7 @@ public class GetFileService {
         
         response.setSuccess(true);
         response.setData(data);
+        response.setErrors(Mapper.getErrors());
      
         return response;
     }

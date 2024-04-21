@@ -40,6 +40,7 @@ public class RenameFolderService {
         }
         
         response.setSuccess(true);
+        response.setErrors(Mapper.getErrors());
         
         return response;
     }

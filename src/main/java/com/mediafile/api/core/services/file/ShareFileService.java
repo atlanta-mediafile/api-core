@@ -37,12 +37,14 @@ public class ShareFileService {
         Response<String> res = fileService.shareFile(userId, fileId, users );
         
         // Configurar la respuesta
-        response.setSuccess(res.isSuccess());
         if (!res.isSuccess()) {
             response.setSuccess(false);
             response.setErrors(Mapper.getErrors(res.getErrors()));
             return response;
         }
+        
+        response.setSuccess(res.isSuccess());
+        response.setErrors(Mapper.getErrors());
 
         return response;
     }

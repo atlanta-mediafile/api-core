@@ -39,6 +39,7 @@ public class MoveFolderService {
         }
         
         response.setSuccess(true);
+        response.setErrors(Mapper.getErrors());
         
         return response;
     }

@@ -42,6 +42,7 @@ public class RegisterService {
         
         response.setSuccess(true);
         response.setData(res.getData());
+        response.setErrors(Mapper.getErrors());
        
         return response;
     } 
