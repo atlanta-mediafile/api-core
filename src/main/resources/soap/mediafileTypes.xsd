@@ -168,7 +168,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
             <xs:sequence>
                 <xs:element name="errors"   type="tns:Errors"/>
                 <xs:element name="success"  type="xs:boolean"/>
-                <xs:element name="data"     type="xs:string"/>
+                <xs:element name="data"     type="xs:string" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -179,7 +179,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
             <xs:sequence>
                 <xs:element name="errors"   type="tns:Errors"/>
                 <xs:element name="success"  type="xs:boolean"/>
-                <xs:element name="data"     type="xs:string"/>
+                <xs:element name="data"     type="xs:string" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -189,7 +189,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="errors"   type="tns:Errors"/>
-                <xs:element name="success"  type="xs:boolean"/>
+                <xs:element name="success"  type="xs:boolean" minOccurs="0"/>
                 <xs:element name="data">
                     <xs:complexType>
                         <xs:sequence>
@@ -209,7 +209,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
             <xs:sequence>
                 <xs:element name="errors"   type="tns:Errors"/>
                 <xs:element name="success"  type="xs:boolean"/>
-                <xs:element name="data">
+                <xs:element name="data" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="folder"   type="tns:FolderInfo"/>
@@ -228,7 +228,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
             <xs:sequence>
                 <xs:element name="errors"   type="tns:Errors"/>
                 <xs:element name="success"  type="xs:boolean"/>
-                <xs:element name="data"     type="xs:string"/>
+                <xs:element name="data"     type="xs:string" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -239,7 +239,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
             <xs:sequence>
                 <xs:element name="errors"   type="tns:Errors"/>
                 <xs:element name="success"  type="xs:boolean"/>
-                <xs:element name="data"     type="xs:string"/>
+                <xs:element name="data"     type="xs:string" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -280,7 +280,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
             <xs:sequence>
                 <xs:element name="errors"   type="tns:Errors"/>
                 <xs:element name="success"  type="xs:boolean"/>
-                <xs:element name="data"     type="tns:File"/>
+                <xs:element name="data"     type="tns:File" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -321,7 +321,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this te
             <xs:sequence>
                 <xs:element name="errors"   type="tns:Errors"/>
                 <xs:element name="success"  type="xs:boolean"/>
-                <xs:element name="data"     type="xs:string"/>
+                <xs:element name="data"     type="xs:string" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
