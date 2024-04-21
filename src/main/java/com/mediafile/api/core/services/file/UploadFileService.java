@@ -65,6 +65,7 @@ public class UploadFileService {
         
         response.setSuccess(true);
         response.setData(res.getData().getId());
+        response.setErrors(Mapper.getErrors());
         
         return response;
     }

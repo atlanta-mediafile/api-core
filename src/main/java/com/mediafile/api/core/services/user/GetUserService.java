@@ -42,6 +42,7 @@ public class GetUserService {
         
         response.setSuccess(true);
         response.setData(user);
+        response.setErrors(Mapper.getErrors());
        
         return response;
     } 

@@ -12,6 +12,8 @@ import com.mediafile.classes.generated.rest.Folder;
 import com.mediafile.classes.generated.rest.Response;
 import com.mediafile.classes.generated.soap.CreateFolderRequest;
 import com.mediafile.classes.generated.soap.CreateFolderResponse;
+import com.mediafile.classes.generated.soap.Errors;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -42,11 +44,14 @@ public class CreateFolderService {
         
         if(!res.isSuccess()){
             response.setSuccess(false);
+            response.setData(null);
             response.setErrors(Mapper.getErrors(res.getErrors()));
             return response;
         }
-        
+
+        response.setSuccess(true);
         response.setData(res.getData().getId());
+        response.setErrors(Mapper.getErrors());
         
         return response;
     }

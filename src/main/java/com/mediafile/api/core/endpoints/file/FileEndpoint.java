@@ -138,24 +138,13 @@ public class FileEndpoint implements IFileEndpoint {
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DownloadFilesRequest")
     public DownloadFilesResponse downloadFile(@RequestPayload DownloadFilesRequest request) {
-         File file = downloadFile.downloadFile(request);
-
-
-
-        DownloadFilesResponse response = new DownloadFilesResponse();
-
-        response.setData(file);
-        response.setSuccess(true);
-
-        return response;
-
+        try{
+            return downloadFile.downloadFile(request);
+        }catch(Exception ex){
+            DownloadFilesResponse res = new DownloadFilesResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
-
-
-
-
-
-
-    
 }

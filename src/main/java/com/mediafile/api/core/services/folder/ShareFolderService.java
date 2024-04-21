@@ -39,6 +39,8 @@ public class ShareFolderService {
         }
         
         response.setSuccess(true);
+        response.setErrors(Mapper.getErrors());
+        
         return response;
     }
     

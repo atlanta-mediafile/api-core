@@ -30,15 +30,17 @@ public class DeleteFileService {
         
         String userId = request.getTarget().getUserId();
         String fileId = request.getTarget().getFileId();
-  
 
         Response<File> res = fileService.deleteFile(userId,fileId);
-        response.setSuccess(res.isSuccess());
+
         if(!res.isSuccess()){
             response.setSuccess(false);
             response.setErrors(Mapper.getErrors(res.getErrors()));
             return response;
         }
+        
+        response.setSuccess(true);
+        response.setErrors(Mapper.getErrors());
 
         return response;
         

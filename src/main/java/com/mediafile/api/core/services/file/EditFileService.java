@@ -17,11 +17,7 @@ public class EditFileService {
     private IFileDataRepository fileService;
     
     public EditFileResponse editFile(EditFileRequest request) {
-        
-        
         EditFileResponse response = new EditFileResponse();
-
-        // Obtener los datos de la solicitud
         
         String userId = request.getTarget().getUserId();
         String fileId = request.getTarget().getFileId();
@@ -29,12 +25,14 @@ public class EditFileService {
         String extension = request.getExtension();
 
         Response<File> res = fileService.editMetadata(userId,fileId, name, extension);
-        response.setSuccess(res.isSuccess());
         if(!res.isSuccess()){
             response.setSuccess(false);
             response.setErrors(Mapper.getErrors(res.getErrors()));
             return response;
         }
+
+        response.setSuccess(res.isSuccess());
+        response.setErrors(Mapper.getErrors());
 
         return response;
         

@@ -39,6 +39,7 @@ public class LoginService {
         
         response.setSuccess(true);
         response.setData(res.getData());
+        response.setErrors(Mapper.getErrors());
        
         return response;
     } 
