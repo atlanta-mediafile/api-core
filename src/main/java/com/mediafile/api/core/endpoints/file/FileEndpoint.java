@@ -64,7 +64,7 @@ public class FileEndpoint implements IFileEndpoint {
     
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetFiles")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetFilesRequest")
     public GetFilesResponse getFiles(@RequestPayload GetFilesRequest request) {
         try{
             return getFileService.getFile(request);
@@ -77,7 +77,7 @@ public class FileEndpoint implements IFileEndpoint {
 
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ShareFile")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ShareFileRequest")
     public ShareFileResponse shareFile(@RequestPayload ShareFileRequest request) {
         try{
             return shareFile.shareFile(request);
@@ -90,7 +90,7 @@ public class FileEndpoint implements IFileEndpoint {
 
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "UploadFile")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "UploadFileRequest")
     public UploadFileResponse uploadFile(@RequestPayload UploadFileRequest request) {
         try{
             return uploadFile.uploadFile(request);
@@ -103,7 +103,7 @@ public class FileEndpoint implements IFileEndpoint {
 
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteFile")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteFileRequest")
     public DeleteFileResponse deleteFile(@RequestPayload DeleteFileRequest request) {
         try{
             return deleteFile.deleteFile(request);
@@ -116,14 +116,14 @@ public class FileEndpoint implements IFileEndpoint {
 
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "MoveFile")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "MoveFileRequest")
     public MoveFileResponse moveFile(@RequestPayload MoveFileRequest request) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "EditFile")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "EditFileRequest")
     public EditFileResponse editFile(@RequestPayload EditFileRequest request) {
         try{
             return editFileService.editFile(request);
@@ -136,26 +136,15 @@ public class FileEndpoint implements IFileEndpoint {
 
     @Override
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DownloadFiles")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DownloadFilesRequest")
     public DownloadFilesResponse downloadFile(@RequestPayload DownloadFilesRequest request) {
-         File file = downloadFile.downloadFile(request);
-
-
-
-        DownloadFilesResponse response = new DownloadFilesResponse();
-
-        response.setData(file);
-        response.setSuccess(true);
-
-        return response;
-
+        try{
+            return downloadFile.downloadFile(request);
+        }catch(Exception ex){
+            DownloadFilesResponse res = new DownloadFilesResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
-
-
-
-
-
-
-    
 }
