@@ -24,5 +24,11 @@ public class Mapper {
         listE.getError().addAll(Arrays.asList(new String[]{error}));
         return listE;
     }
+
+    public static Errors getErrors(){
+        Errors listE = new Errors();
+        listE.getError();
+        return listE;
+    }
     
 }
