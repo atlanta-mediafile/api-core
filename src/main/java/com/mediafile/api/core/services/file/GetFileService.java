@@ -66,6 +66,7 @@ public class GetFileService {
             fileRes.setFolderId(file.getFolderId());
             fileRes.setName(file.getName());
             fileRes.setExtension(file.getExtension());
+            fileRes.setMimeType(file.getMimeType());
             fileRes.setCreatedDate(BigInteger.valueOf(file.getCreatedDate().getTime()));
             fileRes.setSize(BigInteger.valueOf(file.getSize()));
             files.getFiles().add(fileRes);

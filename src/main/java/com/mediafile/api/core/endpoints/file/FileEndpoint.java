@@ -27,10 +27,11 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import com.mediafile.api.core.services.file.UploadFileService;
 import com.mediafile.api.core.services.file.DeleteFileService;
 import com.mediafile.api.core.services.file.ShareFileService;
+import com.mediafile.api.core.services.file.MoveFileService;
+
 import com.mediafile.api.core.utils.Mapper;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import com.mediafile.api.core.services.file.downloadFileService;
-import com.mediafile.classes.generated.soap.File;
 
 
 /**
@@ -60,7 +61,8 @@ public class FileEndpoint implements IFileEndpoint {
     @Autowired
     private ShareFileService shareFile;
     
-    
+    @Autowired
+    private MoveFileService moveFile;
     
     @Override
     @ResponsePayload
@@ -118,7 +120,13 @@ public class FileEndpoint implements IFileEndpoint {
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "MoveFileRequest")
     public MoveFileResponse moveFile(@RequestPayload MoveFileRequest request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            return moveFile.moveFile(request);
+        }catch(Exception ex){
+            MoveFileResponse res = new MoveFileResponse();
+            res.setErrors(Mapper.getErrors(ex.getMessage()));
+            return res;
+        }
     }
 
     @Override

@@ -10,10 +10,8 @@ import com.mediafile.api.core.repositories.grpc.IFileRepository;
 import com.mediafile.api.core.repositories.rest.IFileDataRepository;
 import com.mediafile.api.core.utils.Mapper;
 
-import java.util.Base64;
 import com.mediafile.classes.generated.soap.DownloadFilesRequest;
 import com.mediafile.classes.generated.soap.DownloadFilesResponse;
-import com.google.protobuf.ByteString;
 import com.mediafile.classes.generated.rest.Response;
 import com.mediafile.classes.generated.soap.File;
 import java.math.BigInteger;

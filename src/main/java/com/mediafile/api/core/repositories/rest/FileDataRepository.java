@@ -44,15 +44,15 @@ public class FileDataRepository implements IFileDataRepository {
     }
     
     @Override
-    public Response<String> shareFile(String userId, String fileId, List<String> users) {
+    public Response<Object> shareFile(String userId, String fileId, List<String> users) {
         String url = BASE_URL + "/user/" + userId + "/folder/" + fileId;
         System.out.println(url);
         
-        Response<String> res;
+        Response<Object> res;
        
-        Type type = new TypeToken<Response<String>>() { }.getType();
+        Type type = new TypeToken<Response<Object>>() { }.getType();
         try {
-            res = (Response<String>) Request.Post(url, users, type);
+            res = (Response<Object>) Request.Post(url, users, type);
         } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
             System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});
@@ -63,28 +63,37 @@ public class FileDataRepository implements IFileDataRepository {
 
     @Override
     public Response<File> deleteFile(String userId, String fileId) {
-    String url = BASE_URL + "/user/" + userId + "/file/" + fileId;
-    Response<File> res;
+        String url = BASE_URL + "/user/" + userId + "/file/" + fileId;
+        Response<File> res;
 
-    Type type = new TypeToken<Response<File>>() {}.getType();
+        Type type = new TypeToken<Response<File>>() {}.getType();
+        try {
+            res = (Response<File>) Request.Delete(url, type);
+        } catch (URISyntaxException | IOException | InterruptedException ex) {
+            res = new Response<>(new String[]{"Server error"});
+        }
+
+        return res;
+    }
+
+    @Override
+    public Response<File> moveFile(String userId, String fileId, String folderId) {
+    String url = BASE_URL + "/user/" + userId + "/file/" + fileId + "/move"; // Se cambia el endpoint para reflejar la acción de mover el archivo
+    Response<File> res;
+   
+    Type type = new TypeToken<Response<File>>() { }.getType();
     try {
         res = (Response<File>) Request.Delete(url, type);
     } catch (URISyntaxException | IOException | InterruptedException ex) {
         res = new Response<>(new String[]{"Server error"});
     }
-
+      
     return res;
 }
 
     @Override
-    public Response<File> moveFile(String userId, String fileId, String folderId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public Response<File> editMetadata(String userId, String fileId, String name, String extension) {
-       String url = BASE_URL + "/user/" + userId + "/file/" +fileId;
-        System.out.println(url);
+        String url = BASE_URL + "/user/" + userId + "/file/" +fileId;
         Response<File> res;
         
         Type type = new TypeToken<Response<File>>() { }.getType();

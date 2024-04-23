@@ -29,7 +29,7 @@ public interface IFileDataRepository {
      * @param users
      * @return
      */
-    public Response<String> shareFile(String userId, String fileId, List<String> users);
+    public Response<Object> shareFile(String userId, String fileId, List<String> users);
     
     /**
      *  Delete file

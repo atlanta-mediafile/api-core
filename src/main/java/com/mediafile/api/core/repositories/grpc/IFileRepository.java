@@ -15,9 +15,9 @@ public interface IFileRepository {
     /**
      *  
      * @param fileBytes file bytes
-     * @return uuid string
+     * @return array 0 index uuid string, 1 index ip location
      */
-    public String uploadFile(byte[] fileBytes);
+    public String[] uploadFile(byte[] fileBytes);
     
     /**
      *

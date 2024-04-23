@@ -8,16 +8,11 @@ import com.google.protobuf.ByteString;
 import com.mediafile.classes.generated.grpc.FileServiceGrpc;
 import com.mediafile.classes.generated.grpc.FileServiceGrpc.FileServiceBlockingStub;
 import com.mediafile.classes.generated.grpc.FileServiceGrpc.FileServiceStub;
-import com.mediafile.classes.generated.grpc.FileServiceOuterClass;
 import com.mediafile.classes.generated.grpc.FileServiceOuterClass.UploadSingleFileRequest;
-import com.mediafile.classes.generated.grpc.FileServiceOuterClass.UploadSingleFileResponse;
 import com.mediafile.classes.generated.grpc.FileServiceOuterClass.GetSingleFileRequest;
-import com.mediafile.classes.generated.grpc.FileServiceOuterClass.GetSingleFileResponse;
-import com.mediafile.classes.generated.grpc.FileServiceOuterClass.GetSingleFileResponse;
 import io.grpc.Channel;
 import io.grpc.ManagedChannelBuilder;
 import java.util.Base64;
-import org.springframework.stereotype.Component;
 
 
 /**
@@ -45,16 +40,20 @@ public class FileRepository implements IFileRepository {
     }
     
     @Override
-    public String uploadFile(byte[] fileBytes) {
-        
-        ByteString byteString = ByteString.copyFrom(fileBytes);
+    public String[] uploadFile(byte[] fileBytes) {
         
         var request = UploadSingleFileRequest
                 .newBuilder()
-                .setFile(byteString).build();
+                .setFile(ByteString.copyFrom(fileBytes)).build();
         
         var response = stub.uploadSingleFile(request);
-        return response.getFileId();
+        response.getNodeIp();
+        
+        String[] res = new String[2];
+        res[0] = response.getFileId();
+        res[1] = response.getNodeIp();
+        
+        return res;
     }
 
     @Override
@@ -67,8 +66,6 @@ public class FileRepository implements IFileRepository {
         var  response = stub.getSingleFile(request);
         return Base64.getEncoder().encodeToString(response.getFile().toByteArray());
     }
-     
-     
 
     @Override
     public String uploadFileAsync(String b64File) {
@@ -79,7 +76,5 @@ public class FileRepository implements IFileRepository {
     public String getFileAsync(String fileId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-   
     
 }
