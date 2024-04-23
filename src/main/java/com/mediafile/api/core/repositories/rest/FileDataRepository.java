@@ -8,11 +8,10 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
+import com.mediafile.classes.generated.rest.ShareFolderRequest;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -44,15 +43,15 @@ public class FileDataRepository implements IFileDataRepository {
     }
     
     @Override
-    public Response<Object> shareFile(String userId, String fileId, List<String> users) {
-        String url = BASE_URL + "/user/" + userId + "/folder/" + fileId;
-        System.out.println(url);
-        
+    public Response<Object> shareFile(String userId, String fileId, String[] users) {
+        String url = BASE_URL + "/user/" + userId + "/file/" + fileId;
         Response<Object> res;
        
         Type type = new TypeToken<Response<Object>>() { }.getType();
         try {
-            res = (Response<Object>) Request.Post(url, users, type);
+            ShareFolderRequest request = new ShareFolderRequest();
+            request.setUsers(users);
+            res = (Response<Object>) Request.Post(url, request, type);
         } catch (URISyntaxException | IOException | InterruptedException | JsonSyntaxException ex ) {
             System.out.println("[api-core] error: " + ex);
             res = new Response(new String[]{"Server error"});

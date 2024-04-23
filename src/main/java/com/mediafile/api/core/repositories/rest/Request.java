@@ -25,6 +25,7 @@ public class Request {
     {
         Gson gson = new Gson();
         String json = gson.toJson(body);
+        System.out.println(body);
         
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
@@ -35,7 +36,6 @@ public class Request {
             .build();
         
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        
         var res = gson.fromJson(response.body(), typeOfT);
         return res;
     }
@@ -102,7 +102,6 @@ public class Request {
             .build();
         
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        
         Gson gson = new Gson();
         var res = gson.fromJson(response.body(), typeOfT);
         return res;

@@ -12,7 +12,6 @@ import com.mediafile.classes.generated.soap.Identifiers;
 import com.mediafile.classes.generated.rest.Response;
 import com.mediafile.classes.generated.soap.ShareFileResponse;
 import com.mediafile.api.core.utils.Mapper;
-import java.util.List;
 
 /**
  *
@@ -30,8 +29,7 @@ public class ShareFileService {
         Identifiers target = request.getTarget();
         String userId = target.getUserId();
         String fileId = target.getFileId();
-        List<String> users = request.getUsers().getUser();
-
+        String[] users = request.getUsers().getUser().toArray(String[]::new);
         
         // Llamar al repositorio para compartir el archivo
         Response<Object> res = fileService.shareFile(userId, fileId, users );
