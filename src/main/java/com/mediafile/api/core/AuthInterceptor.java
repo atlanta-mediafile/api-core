@@ -39,7 +39,7 @@ public class AuthInterceptor implements EndpointInterceptor {
         DOMSource bodyDomSource = (DOMSource) bodySource;
         String localpart = bodyDomSource.getNode().getLocalName();
         
-        if(localpart.equals("Login") || localpart.equals("Register")){
+        if(localpart.equals("LoginRequest") || localpart.equals("RegisterRequest")){
             return true;
         }
         SoapHeaderElement auth;
