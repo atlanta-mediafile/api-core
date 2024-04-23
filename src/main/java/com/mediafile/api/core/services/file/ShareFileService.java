@@ -24,7 +24,7 @@ public class ShareFileService {
     @Autowired
     private IFileDataRepository fileService;
     
-    public ShareFileResponse shareFile(ShareFileRequest request) {
+        public ShareFileResponse shareFile(ShareFileRequest request) {
         ShareFileResponse response = new ShareFileResponse();
 
         Identifiers target = request.getTarget();
@@ -34,7 +34,7 @@ public class ShareFileService {
 
         
         // Llamar al repositorio para compartir el archivo
-        Response<String> res = fileService.shareFile(userId, fileId, users );
+        Response<Object> res = fileService.shareFile(userId, fileId, users );
         
         // Configurar la respuesta
         if (!res.isSuccess()) {

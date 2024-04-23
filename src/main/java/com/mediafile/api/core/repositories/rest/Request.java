@@ -25,7 +25,7 @@ public class Request {
     {
         Gson gson = new Gson();
         String json = gson.toJson(body);
-         
+        
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(new URI(uri))

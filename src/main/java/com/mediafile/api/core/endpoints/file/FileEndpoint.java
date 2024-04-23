@@ -30,7 +30,6 @@ import com.mediafile.api.core.services.file.ShareFileService;
 import com.mediafile.api.core.utils.Mapper;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import com.mediafile.api.core.services.file.downloadFileService;
-import com.mediafile.classes.generated.soap.File;
 
 
 /**

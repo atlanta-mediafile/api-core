@@ -15,8 +15,6 @@ import java.util.regex.Pattern;
 public class Base64Utils {
     
     public static String getMimeType(String encoded) {
-        System.out.println(encoded);
-        
         String result = null;
 
         if (encoded == null || encoded.isEmpty() || !encoded.startsWith("data:")) {

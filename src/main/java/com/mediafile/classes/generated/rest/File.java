@@ -27,6 +27,8 @@ public class File implements Serializable {
     private boolean status;
     @SerializedName("user_id")
     private String userId;
+    @SerializedName("ip_location")
+    private String ipLocation;
 
     public String getUserId() {
         return userId;
@@ -94,6 +96,14 @@ public class File implements Serializable {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getIpLocation() {
+        return ipLocation;
+    }
+
+    public void setIpLocation(String ipLocation) {
+        this.ipLocation = ipLocation;
     }
 
     @Override

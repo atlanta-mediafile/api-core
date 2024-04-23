@@ -33,9 +33,12 @@ public class UploadFileService {
         UploadFileResponse response = new UploadFileResponse();
         
         byte[] bytes = Base64Utils.toBytes(uploadFile.getContent());
-        String id = fileRepo.uploadFile(bytes);
+        String[] uploadFileRes = fileRepo.uploadFile(bytes);
         
-        if(id == null){
+        String fileId = uploadFileRes[0];
+        String nodeIp = uploadFileRes[1]; 
+        
+        if(fileId == null || nodeIp == null){
             response.setSuccess(false);
             response.setErrors(Mapper.getErrors("Failed to upload file, try later"));
             return response;
@@ -46,7 +49,7 @@ public class UploadFileService {
         
         File newFile = new File();
         
-        newFile.setId(id);
+        newFile.setId(fileId);
         newFile.setName(uploadFile.getName());
         newFile.setExtension(uploadFile.getExtension());
         newFile.setMimeType(mimeType);
@@ -54,6 +57,7 @@ public class UploadFileService {
         newFile.setSize(size);
         newFile.setCreatedDate(new Date());
         newFile.setStatus(true);
+        newFile.setIpLocation(nodeIp);
         
         Response<File> res = fileDataRepo.saveMetadata(uploadFile.getTarget().getUserId(), newFile);
         
