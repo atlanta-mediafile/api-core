@@ -6,7 +6,6 @@ package com.mediafile.api.core.repositories.rest;
 
 import com.mediafile.classes.generated.rest.File;
 import com.mediafile.classes.generated.rest.Response;
-import java.util.List;
 
 /**
  *
@@ -29,7 +28,7 @@ public interface IFileDataRepository {
      * @param users
      * @return
      */
-    public Response<Object> shareFile(String userId, String fileId, List<String> users);
+    public Response<Object> shareFile(String userId, String fileId, String[] users);
     
     /**
      *  Delete file
