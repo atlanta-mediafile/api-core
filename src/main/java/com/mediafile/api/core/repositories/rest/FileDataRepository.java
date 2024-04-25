@@ -7,8 +7,10 @@ package com.mediafile.api.core.repositories.rest;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mediafile.classes.generated.rest.File;
+import com.mediafile.classes.generated.rest.MoveFolderRequest;
 import com.mediafile.classes.generated.rest.Response;
 import com.mediafile.classes.generated.rest.ShareFolderRequest;
+import com.mediafile.classes.generated.rest.MoveFileRequest;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
@@ -82,7 +84,9 @@ public class FileDataRepository implements IFileDataRepository {
    
     Type type = new TypeToken<Response<File>>() { }.getType();
     try {
-        res = (Response<File>) Request.Delete(url, type);
+        MoveFileRequest request = new MoveFileRequest();
+        request.setNewFolderId(folderId);
+        res = (Response<File>) Request.Patch(url, request, type);
     } catch (URISyntaxException | IOException | InterruptedException ex) {
         res = new Response<>(new String[]{"Server error"});
     }
