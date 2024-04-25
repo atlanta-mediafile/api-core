@@ -46,7 +46,9 @@ public class MoveFileService {
             response.setErrors(Mapper.getErrors(res.getErrors()));
             return response;
         }
-
+        response.setSuccess(res.isSuccess());
+        response.setErrors(Mapper.getErrors());
+        
         return response;
         
 
